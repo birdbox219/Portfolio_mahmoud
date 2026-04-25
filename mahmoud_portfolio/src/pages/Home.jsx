@@ -3,6 +3,7 @@ import { motion } from 'framer-motion';
 import PageWrapper from '../components/PageWrapper';
 import Typewriter from '../components/Typewriter';
 import { PORTFOLIO_DATA } from '../data';
+import WireframeAnimation from '../components/WireframeAnimation';
 
 const containerVariants = {
   hidden: { opacity: 0 },
@@ -20,8 +21,8 @@ const itemVariants = {
 export default function Home() {
   return (
     <PageWrapper>
-      <main className="effect-scanlines flex-grow pt-[80px] md:pl-[256px] pb-[40px] flex items-center min-h-screen px-margin">
-        <div className="max-w-container-max w-full">
+      <main className="effect-scanlines flex-grow pt-[80px] md:pl-[256px] pb-[40px] flex items-center min-h-screen px-margin overflow-hidden relative">
+        <div className="max-w-container-max w-full flex justify-between items-center relative">
           <motion.div 
             className="flex flex-col gap-stack-lg max-w-3xl"
             variants={containerVariants}
@@ -62,6 +63,11 @@ export default function Home() {
               </Link>
             </motion.div>
           </motion.div>
+          
+          {/* Side Animation */}
+          <div className="hidden lg:block absolute right-0 top-1/2 -translate-y-1/2 w-[500px] h-[500px] pointer-events-none">
+            <WireframeAnimation />
+          </div>
         </div>
       </main>
     </PageWrapper>

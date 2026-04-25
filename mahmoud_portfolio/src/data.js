@@ -77,13 +77,13 @@ export const PORTFOLIO_DATA = {
     },
     {
       id: "002",
-      title: "OPERATION_AEGIS",
-      category: "Action",
+      title: "LOGIC_RIFT",
+      category: "Puzzle",
       status: "ARCHIVED",
       image: "https://lh3.googleusercontent.com/aida-public/AB6AXuDFVZiFwcYtbI4DYAwbgGV6Lobo0azhtbqygMdBqGT3oGPZRx4A0Lff0mHE2_4Rv8s1X9zDmrgn3binyx8DPEfwqqmxc8vljUVfwAohS4QCKdFl8RvNd5jAm9tamaaYXtAhUarb2DULWs-x4RtUvywUDLrHpMHoinYy3b1TxGoxeOqL-puDYpftuehxWSrjP2uHrpq97oRPIx7eSJYK7oPNzR8jamq_So7rfeYbZ5D7SPdE2acIjR30D9fkqrp1E1_QRhO18XF-HVg",
       detail: {
-        cycle: "2022.1",
-        classType: "COMBAT",
+        cycle: "2026.2",
+        classType: "PUZZLE",
         overview: "A tactical action prototype utilizing defensive shield mechanics and parry-based combat loops.",
         objective: "Design a combat system that rewards precise timing over button mashing.",
         operatorRole: "Systems Designer",
@@ -92,16 +92,14 @@ export const PORTFOLIO_DATA = {
         anomalyReport: "Animation state machine became overly complex and difficult to debug.",
         resolution: "Refactored logic into a structured State Pattern in C++.",
         // Game execution fields
-        embedUrl: "https://itch.io/embed-upload/PLACEHOLDER_002",  // Replace with your actual itch.io embed URL
-        itchUrl: "https://birdbox774.itch.io/operation-aegis",
+        embedUrl: "https://itch.io/embed-upload/17299350?color=333333",  // Replace with your actual itch.io embed URL
+        itchUrl: "https://birdbox774.itch.io/logic-rift",
         controls: [
           { key: "WASD", action: "MOVE" },
-          { key: "MOUSE", action: "AIM" },
-          { key: "LMB", action: "ATTACK" },
-          { key: "RMB", action: "SHIELD" },
-          { key: "SPACE", action: "DODGE" }
+          { key: "E", action: "INTERACT" },
+          { key: "SPACE", action: "JUMP" }
         ],
-        gamepadSupported: false,
+        gamepadSupported: true,
         systemRequirements: "DESKTOP_ONLY",
         estimatedLoadTime: "30-60s"
       }
