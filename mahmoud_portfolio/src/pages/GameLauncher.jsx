@@ -18,6 +18,7 @@ export default function GameLauncher() {
   const { id } = useParams();
   const [gameState, setGameState] = useState(STATES.STANDBY);
   const [isMobile, setIsMobile] = useState(false);
+  const [iframeSrc, setIframeSrc] = useState(null); // null = iframe not mounted yet
   const gameContainerRef = useRef(null);
   const iframeRef = useRef(null);
 
@@ -50,6 +51,9 @@ export default function GameLauncher() {
       window.open(detail.itchUrl, '_blank');
       return;
     }
+    // Start loading the iframe immediately when user clicks run,
+    // but show the boot sequence animation on top
+    setIframeSrc(detail.embedUrl);
     setGameState(STATES.BOOTING);
   };
 
@@ -57,7 +61,9 @@ export default function GameLauncher() {
     setGameState(STATES.LOADING);
   };
 
-  // Fallback: if iframe onload doesn't fire (cross-origin), auto-transition after 5s
+  // Auto-transition from LOADING → RUNNING after timeout
+  // The itch.io embed onLoad fires on the wrapper page (not the game itself),
+  // so we use a timed transition instead for a clean experience
   useEffect(() => {
     if (gameState !== STATES.LOADING) return;
     const timeout = setTimeout(() => {
@@ -66,15 +72,9 @@ export default function GameLauncher() {
     return () => clearTimeout(timeout);
   }, [gameState]);
 
-  const handleIframeLoad = () => {
-    setGameState(STATES.RUNNING);
-  };
-
   const handleExit = () => {
-    // Clean up iframe to free memory
-    if (iframeRef.current) {
-      iframeRef.current.src = 'about:blank';
-    }
+    // Reset iframe src to free memory, then reset state
+    setIframeSrc(null);
     setGameState(STATES.STANDBY);
   };
 
@@ -87,6 +87,9 @@ export default function GameLauncher() {
       }
     }
   }, []);
+
+  // Determine if the iframe should be visible (only in RUNNING state)
+  const iframeVisible = gameState === STATES.RUNNING;
 
   return (
     <PageWrapper>
@@ -211,44 +214,54 @@ export default function GameLauncher() {
             )}
           </AnimatePresence>
 
-          {/* LOADING State */}
-          {gameState === STATES.LOADING && (
-            <div
-              className="absolute inset-0 z-40 bg-background flex flex-col items-center justify-center gap-4 cursor-pointer"
-              onClick={() => setGameState(STATES.RUNNING)}
-            >
-              <div className="font-label-md text-label-md text-primary uppercase tracking-widest flex items-center gap-2">
-                <motion.span
-                  animate={{ opacity: [1, 0.3, 1] }}
-                  transition={{ repeat: Infinity, duration: 1.5, ease: 'easeInOut' }}
-                >
-                  LOADING_ASSETS...
-                </motion.span>
-              </div>
-              {/* Animated progress bar */}
-              <div className="w-64 h-[2px] bg-outline-variant overflow-hidden">
-                <motion.div
-                  className="h-full bg-primary"
-                  initial={{ x: '-100%' }}
-                  animate={{ x: '100%' }}
-                  transition={{ repeat: Infinity, duration: 1.5, ease: 'linear' }}
-                  style={{ width: '50%' }}
-                />
-              </div>
-              <p className="font-label-sm text-label-sm text-on-surface-variant">PLEASE STAND BY</p>
-            </div>
-          )}
+          {/* LOADING State — sits above iframe so user never sees the raw iframe loading */}
+          <AnimatePresence>
+            {gameState === STATES.LOADING && (
+              <motion.div
+                className="absolute inset-0 z-40 bg-background flex flex-col items-center justify-center gap-4 cursor-pointer"
+                initial={{ opacity: 1 }}
+                exit={{ opacity: 0 }}
+                transition={{ duration: 0.6, ease: 'easeOut' }}
+                onClick={() => setGameState(STATES.RUNNING)}
+              >
+                <div className="font-label-md text-label-md text-primary uppercase tracking-widest flex items-center gap-2">
+                  <motion.span
+                    animate={{ opacity: [1, 0.3, 1] }}
+                    transition={{ repeat: Infinity, duration: 1.5, ease: 'easeInOut' }}
+                  >
+                    LOADING_ASSETS...
+                  </motion.span>
+                </div>
+                {/* Animated progress bar */}
+                <div className="w-64 h-[2px] bg-outline-variant overflow-hidden">
+                  <motion.div
+                    className="h-full bg-primary"
+                    initial={{ x: '-100%' }}
+                    animate={{ x: '100%' }}
+                    transition={{ repeat: Infinity, duration: 1.5, ease: 'linear' }}
+                    style={{ width: '50%' }}
+                  />
+                </div>
+                <p className="font-label-sm text-label-sm text-on-surface-variant">PLEASE STAND BY</p>
+              </motion.div>
+            )}
+          </AnimatePresence>
 
-          {/* iframe — only rendered when LOADING or RUNNING */}
-          {(gameState === STATES.LOADING || gameState === STATES.RUNNING) && (
+          {/* iframe — mounted once via iframeSrc, never conditionally unmounted during play.
+               Stays behind overlays (z-10) until RUNNING state reveals it.
+               Uses CSS opacity for smooth reveal instead of mount/unmount. */}
+          {iframeSrc && (
             <iframe
               ref={iframeRef}
-              src={detail.embedUrl}
+              src={iframeSrc}
               title={`${project.title} - Game`}
               allow="autoplay; fullscreen; gamepad"
               allowFullScreen
-              onLoad={handleIframeLoad}
-              className="absolute inset-0 w-full h-full border-none z-10"
+              className="absolute inset-0 w-full h-full border-none z-10 transition-opacity duration-500"
+              style={{
+                opacity: iframeVisible ? 1 : 0,
+                pointerEvents: iframeVisible ? 'auto' : 'none',
+              }}
             />
           )}
 
