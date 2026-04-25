@@ -125,7 +125,7 @@ export const PORTFOLIO_DATA = {
       { name: "EMAIL", url: "mailto:operator@automata.os", icon: "mail" },
       { name: "GITHUB", url: "https://github.com/", icon: "code" },
       { name: "LINKEDIN", url: "https://linkedin.com/", icon: "work" },
-      { name: "ITCH.IO", url: "https://birdbox774.itch.io/", icon: "gamepad" }
+      { name: "FACEBOOK", url: "https://birdbox774.itch.io/", icon: "gamepad" }
     ]
   }
 };
