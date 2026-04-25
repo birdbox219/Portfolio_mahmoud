@@ -6,6 +6,7 @@ import Skills from './pages/Skills';
 import Projects from './pages/Projects';
 import ProjectDetail from './pages/ProjectDetail';
 import Contact from './pages/Contact';
+import GameLauncher from './pages/GameLauncher';
 
 export default function App() {
   return (
@@ -17,6 +18,7 @@ export default function App() {
           <Route path="skills" element={<Skills />} />
           <Route path="projects" element={<Projects />} />
           <Route path="projects/:id" element={<ProjectDetail />} />
+          <Route path="play/:id" element={<GameLauncher />} />
           <Route path="terminal" element={<Contact />} />
         </Route>
       </Routes>

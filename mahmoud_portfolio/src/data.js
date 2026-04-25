@@ -60,7 +60,19 @@ export const PORTFOLIO_DATA = {
         techStack: ["Unity Engine", "C#", "DOTS", "FMOD"],
         detailImage: "https://lh3.googleusercontent.com/aida-public/AB6AXuBBt0rD9H0S0WBQFpHTEhdnSyxk7jRHiBwCpvlBpLKvA88_tSM79dWg15wJGn7FCAGl4QUnh0KVInXVteLrwN3Q3FddqUyixPmCCD-YZ1ZA_xOh1urdQCNH3Dip74Vnj39SZMReCg14_i5BJtdguljPJLtSi6_1jlsQnK6u5CWrtRaVTN-uR8e4GCyEPJKkrVU1mTlxCSritJDcqpelmya3Cvn_DjQa4ZiAsxrBOXsmRaU4DhxuF61eKAyvBhBT6axzbJpgc6-MFsU",
         anomalyReport: "Initial wheel collision meshes caused severe jittering at high speeds.",
-        resolution: "Implemented a custom raycast-based suspension system to decouple wheel rendering from strict physics collisions."
+        resolution: "Implemented a custom raycast-based suspension system to decouple wheel rendering from strict physics collisions.",
+        // Game execution fields
+        embedUrl: "https://itch.io/embed-upload/17298481?color=143A5E",
+        itchUrl: "https://birdbox774.itch.io/defintel",
+        controls: [
+          { key: "WASD", action: "STEER" },
+          { key: "SPACE", action: "BRAKE" },
+          { key: "SHIFT", action: "BOOST" },
+          { key: "R", action: "RESET" }
+        ],
+        gamepadSupported: true,
+        systemRequirements: "DESKTOP_ONLY",
+        estimatedLoadTime: "30-60s"
       }
     },
     {
@@ -78,7 +90,20 @@ export const PORTFOLIO_DATA = {
         techStack: ["Unreal Engine", "Blueprints", "C++"],
         detailImage: "https://lh3.googleusercontent.com/aida-public/AB6AXuDFVZiFwcYtbI4DYAwbgGV6Lobo0azhtbqygMdBqGT3oGPZRx4A0Lff0mHE2_4Rv8s1X9zDmrgn3binyx8DPEfwqqmxc8vljUVfwAohS4QCKdFl8RvNd5jAm9tamaaYXtAhUarb2DULWs-x4RtUvywUDLrHpMHoinYy3b1TxGoxeOqL-puDYpftuehxWSrjP2uHrpq97oRPIx7eSJYK7oPNzR8jamq_So7rfeYbZ5D7SPdE2acIjR30D9fkqrp1E1_QRhO18XF-HVg",
         anomalyReport: "Animation state machine became overly complex and difficult to debug.",
-        resolution: "Refactored logic into a structured State Pattern in C++."
+        resolution: "Refactored logic into a structured State Pattern in C++.",
+        // Game execution fields
+        embedUrl: "https://itch.io/embed-upload/PLACEHOLDER_002",  // Replace with your actual itch.io embed URL
+        itchUrl: "https://birdbox774.itch.io/operation-aegis",
+        controls: [
+          { key: "WASD", action: "MOVE" },
+          { key: "MOUSE", action: "AIM" },
+          { key: "LMB", action: "ATTACK" },
+          { key: "RMB", action: "SHIELD" },
+          { key: "SPACE", action: "DODGE" }
+        ],
+        gamepadSupported: false,
+        systemRequirements: "DESKTOP_ONLY",
+        estimatedLoadTime: "30-60s"
       }
     },
     {
@@ -96,7 +121,14 @@ export const PORTFOLIO_DATA = {
         techStack: ["Node.js", "WebSockets", "Redis", "Docker"],
         detailImage: "https://lh3.googleusercontent.com/aida-public/AB6AXuAP-uZ2sxwlqQ4Q2SWEej8fGgiBzdGwLFhgYk9kwhlbFER2aON0fzzviq75bc7tXfsxPdxgZR6F9Ia9T6YuVS6dS5s31dpsS-9VAY--EPN9dwaY0abK9P5vyieN0zynICxN1gj6cYpQEFxQOboNtlDjBi8-vz_0F0oI85etIRt5NWGknMgFvDo5cuHq8EQag7fSqkULKc6WmX3wBoInoleBtrmoha4VCw2ogaCTmvX0yU4hXKrhc-6xTd4NP6BGSE1ZbIvtlKibqdE",
         anomalyReport: "Redis cache memory leaks during high concurrency tests.",
-        resolution: "Optimized connection pooling and TTL settings for ephemeral session data."
+        resolution: "Optimized connection pooling and TTL settings for ephemeral session data.",
+        // Game execution fields — NO WEB BUILD for this project
+        embedUrl: null,
+        itchUrl: "https://birdbox774.itch.io/nexus-core",
+        controls: [],
+        gamepadSupported: false,
+        systemRequirements: "DESKTOP_ONLY",
+        estimatedLoadTime: "N/A"
       }
     },
     {
@@ -104,7 +136,7 @@ export const PORTFOLIO_DATA = {
       title: "ECHO_SYSTEM",
       category: "Simulation",
       status: "ACTIVE",
-      image: "https://lh3.googleusercontent.com/aida-public/AB6AXuBBt0rD9H0S0WBQFpHTEhdnSyxk7jRHiBwCpvlBpLKvA88_tSM79dWg15wJGn7FCAGl4QUnh0KVInXVteLrwN3Q3FddqUyixPmCCD-YZ1ZA_xOh1urdQCNH3Dip74Vnj39SZMReCg14_i5BJtdguljPJLtSi6_1jlsQnK6u5CWrtRaVTN-uR8e4GCyEPJKkrVU1mTlxCSritJDcqpelmya3Cvn_DjQa4ZiAsxrBOXsmRaU4DhxuF61eKAyvBhBT6axzbJpgc6-MFsU", // Using the Neural Net Visualizer image from original as fallback
+      image: "https://lh3.googleusercontent.com/aida-public/AB6AXuBBt0rD9H0S0WBQFpHTEhdnSyxk7jRHiBwCpvlBpLKvA88_tSM79dWg15wJGn7FCAGl4QUnh0KVInXVteLrwN3Q3FddqUyixPmCCD-YZ1ZA_xOh1urdQCNH3Dip74Vnj39SZMReCg14_i5BJtdguljPJLtSi6_1jlsQnK6u5CWrtRaVTN-uR8e4GCyEPJKkrVU1mTlxCSritJDcqpelmya3Cvn_DjQa4ZiAsxrBOXsmRaU4DhxuF61eKAyvBhBT6axzbJpgc6-MFsU",
       detail: {
         cycle: "2023.4",
         classType: "SIMULATION",
@@ -114,7 +146,19 @@ export const PORTFOLIO_DATA = {
         techStack: ["Unity Engine", "C#", "HLSL Shaders", "Compute Pipelines"],
         detailImage: "https://lh3.googleusercontent.com/aida-public/AB6AXuBBt0rD9H0S0WBQFpHTEhdnSyxk7jRHiBwCpvlBpLKvA88_tSM79dWg15wJGn7FCAGl4QUnh0KVInXVteLrwN3Q3FddqUyixPmCCD-YZ1ZA_xOh1urdQCNH3Dip74Vnj39SZMReCg14_i5BJtdguljPJLtSi6_1jlsQnK6u5CWrtRaVTN-uR8e4GCyEPJKkrVU1mTlxCSritJDcqpelmya3Cvn_DjQa4ZiAsxrBOXsmRaU4DhxuF61eKAyvBhBT6axzbJpgc6-MFsU",
         anomalyReport: "Initial compilation iterations experienced severe frame dropping when node counts exceeded 25,000.",
-        resolution: "Migrated spatial calculations to GPU Compute Shaders using Unity DOTS."
+        resolution: "Migrated spatial calculations to GPU Compute Shaders using Unity DOTS.",
+        // Game execution fields
+        embedUrl: "https://itch.io/embed-upload/PLACEHOLDER_004",  // Replace with your actual itch.io embed URL
+        itchUrl: "https://birdbox774.itch.io/echo-system",
+        controls: [
+          { key: "MOUSE", action: "NAVIGATE" },
+          { key: "SCROLL", action: "ZOOM" },
+          { key: "SPACE", action: "PAUSE SIM" },
+          { key: "R", action: "RESET VIEW" }
+        ],
+        gamepadSupported: false,
+        systemRequirements: "DESKTOP_ONLY",
+        estimatedLoadTime: "45-90s"
       }
     }
   ],

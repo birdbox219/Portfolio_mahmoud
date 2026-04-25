@@ -1,4 +1,4 @@
-import { useParams, Navigate } from 'react-router-dom';
+import { useParams, Navigate, Link } from 'react-router-dom';
 import PageWrapper from '../components/PageWrapper';
 import { PORTFOLIO_DATA } from '../data';
 
@@ -117,6 +117,52 @@ export default function ProjectDetail() {
               <p className="font-body-md text-body-md text-on-surface-variant">
                 {detail.resolution}
               </p>
+            </div>
+          </div>
+        </section>
+
+        {/* Section 06: Execute Module — shown on ALL projects */}
+        <section className="border-t border-outline-variant py-stack-lg grid grid-cols-1 md:grid-cols-12 gap-gutter">
+          <div className="md:col-span-3">
+            <h2 className="font-label-md text-label-md text-tertiary">06 // EXECUTE_MODULE</h2>
+          </div>
+          <div className="md:col-span-9 flex flex-col gap-stack-md">
+            {/* Warning banner */}
+            <div className="p-4 bg-surface-container-low border-l-2 border-secondary">
+              <p className="font-label-sm text-label-sm text-on-surface-variant">
+                ⚠ THIS MODULE REQUIRES A DESKTOP BROWSER. ESTIMATED LOAD TIME: {detail.estimatedLoadTime}
+              </p>
+            </div>
+            {/* Action buttons — same UI, different behavior */}
+            <div className="flex gap-stack-md flex-wrap">
+              {detail.embedUrl ? (
+                <Link
+                  to={`/play/${project.id}`}
+                  className="bg-on-surface text-surface px-6 py-4 font-label-md text-label-md border border-on-surface hover:bg-primary hover:text-on-primary transition-colors flex items-center gap-2"
+                >
+                  <span className="material-symbols-outlined text-[16px]">play_arrow</span>
+                  [ INITIALIZE_SIMULATION ]
+                </Link>
+              ) : (
+                <a
+                  href={detail.itchUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="bg-on-surface text-surface px-6 py-4 font-label-md text-label-md border border-on-surface hover:bg-primary hover:text-on-primary transition-colors flex items-center gap-2"
+                >
+                  <span className="material-symbols-outlined text-[16px]">play_arrow</span>
+                  [ INITIALIZE_SIMULATION ]
+                </a>
+              )}
+              <a
+                href={detail.itchUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="bg-surface text-on-surface px-6 py-4 font-label-md text-label-md border border-outline-variant hover:bg-surface-container transition-colors flex items-center gap-2"
+              >
+                <span className="material-symbols-outlined text-[16px]">download</span>
+                [ DOWNLOAD_BUILD ]
+              </a>
             </div>
           </div>
         </section>
