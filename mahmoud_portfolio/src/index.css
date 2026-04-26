@@ -44,6 +44,21 @@
     100% { background-position: 0 100vh; }
   }
 
+  /* Custom Scrollbar for Terminal Logs */
+  .custom-scrollbar::-webkit-scrollbar {
+    width: 6px;
+  }
+  .custom-scrollbar::-webkit-scrollbar-track {
+    background: rgba(0, 0, 0, 0.1);
+  }
+  .custom-scrollbar::-webkit-scrollbar-thumb {
+    background: var(--color-primary, #615f4c);
+    border-radius: 3px;
+  }
+  .custom-scrollbar::-webkit-scrollbar-thumb:hover {
+    background: var(--color-on-surface, #1b1c17);
+  }
+
   /* Some pages use .light class on html */
   html.light {
     color-scheme: light;

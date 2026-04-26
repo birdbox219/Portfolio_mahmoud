@@ -1,7 +1,72 @@
+import { useState, useRef, useEffect } from 'react';
 import { PORTFOLIO_DATA } from '../data';
 import PageWrapper from '../components/PageWrapper';
 
 export default function Contact() {
+  const [formData, setFormData] = useState({ name: '', message: '' });
+  const [status, setStatus] = useState('IDLE'); // IDLE, TRANSMITTING, SUCCESS, ERROR
+  const [logs, setLogs] = useState([
+    "0x00A1: ESTABLISHING SECURE CONNECTION...",
+    "0x00A2: VERIFYING PROTOCOLS... OK",
+    "0x00A3: READY FOR USER INPUT"
+  ]);
+  const logContainerRef = useRef(null);
+
+  // Auto-scroll logs to bottom
+  useEffect(() => {
+    if (logContainerRef.current) {
+      logContainerRef.current.scrollTop = logContainerRef.current.scrollHeight;
+    }
+  }, [logs]);
+
+  const handleChange = (e) => {
+    setFormData({ ...formData, [e.target.name]: e.target.value });
+  };
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    if (!formData.name || !formData.message) {
+      setLogs(prev => [...prev, "0x00E1: ERROR - MISSING PAYLOAD PARAMETERS."]);
+      return;
+    }
+
+    setStatus('TRANSMITTING');
+    setLogs(prev => [...prev, "0x00A4: ENCRYPTING PAYLOAD...", "0x00A5: TRANSMITTING TO SERVER..."]);
+
+    try {
+      const response = await fetch("https://api.web3forms.com/submit", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Accept: "application/json",
+        },
+        body: JSON.stringify({
+          access_key: "10af9687-75c4-4ef1-8289-620e6646d20e",
+          name: formData.name,
+          message: formData.message,
+        }),
+      });
+      const result = await response.json();
+      
+      if (result.success) {
+        setStatus('SUCCESS');
+        setLogs(prev => [...prev, "0x00A6: TRANSMISSION SUCCESSFUL.", "0x00A7: AWAITING FURTHER INPUT"]);
+        setFormData({ name: '', message: '' });
+        
+        // Reset status to IDLE after a few seconds so they can send another message
+        setTimeout(() => setStatus('IDLE'), 3000);
+      } else {
+        setStatus('ERROR');
+        setLogs(prev => [...prev, `0x00E2: ERROR - ${result.message}`]);
+        setTimeout(() => setStatus('IDLE'), 3000);
+      }
+    } catch (error) {
+      setStatus('ERROR');
+      setLogs(prev => [...prev, "0x00E3: CRITICAL NETWORK FAILURE."]);
+      setTimeout(() => setStatus('IDLE'), 3000);
+    }
+  };
+
   return (
     <PageWrapper>
     <main className="pt-[80px] md:pl-64 min-h-screen pb-[60px] relative">
@@ -56,7 +121,7 @@ export default function Contact() {
               <div className="font-label-sm text-label-sm text-on-surface-variant mb-stack-sm">&gt; IDENTIFY_TARGET_NODES:</div>
               <div className="flex flex-wrap gap-stack-md">
                 {PORTFOLIO_DATA.contact.links.map((link) => (
-                  <a key={link.name} className="border border-outline-variant bg-surface px-4 py-2 font-label-md text-label-md text-on-surface hover:bg-primary-container hover:text-on-primary-container transition-colors flex items-center gap-2" href={link.url}>
+                  <a key={link.name} className="border border-outline-variant bg-surface px-4 py-2 font-label-md text-label-md text-on-surface hover:bg-primary-container hover:text-on-primary-container transition-colors flex items-center gap-2" href={link.url} target={link.name !== 'EMAIL' ? "_blank" : undefined} rel={link.name !== 'EMAIL' ? "noopener noreferrer" : undefined}>
                     <span className="material-symbols-outlined text-[14px]">{link.icon}</span> {link.name}
                   </a>
                 ))}
@@ -66,23 +131,53 @@ export default function Contact() {
             {/* Input Form */}
             <div className="mb-stack-lg">
               <div className="font-label-sm text-label-sm text-on-surface-variant mb-stack-md">&gt; INITIATE_MESSAGE_PROTOCOL:</div>
-              <form className="flex flex-col gap-stack-md bg-surface p-stack-md border border-outline-variant">
+              <form onSubmit={handleSubmit} className="flex flex-col gap-stack-md bg-surface p-stack-md border border-outline-variant">
                 <div className="flex flex-col gap-unit">
                   <label className="font-label-sm text-label-sm text-on-surface-variant" htmlFor="operator_name">INPUT_NAME // STRING</label>
                   <div className="relative">
                     <span className="absolute left-3 top-3 font-label-md text-label-md text-primary">&gt;</span>
-                    <input className="w-full bg-surface-container-lowest border border-outline-variant pl-8 pr-4 py-3 font-label-md text-label-md text-on-surface focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary rounded-none transition-all placeholder:text-outline-variant" id="operator_name" placeholder="ENTER_DESIGNATION" type="text" />
+                    <input 
+                      className="w-full bg-surface-container-lowest border border-outline-variant pl-8 pr-4 py-3 font-label-md text-label-md text-on-surface focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary rounded-none transition-all placeholder:text-outline-variant" 
+                      id="operator_name" 
+                      name="name"
+                      value={formData.name}
+                      onChange={handleChange}
+                      placeholder="ENTER_DESIGNATION" 
+                      type="text" 
+                      disabled={status === 'TRANSMITTING'}
+                    />
                   </div>
                 </div>
                 <div className="flex flex-col gap-unit">
                   <label className="font-label-sm text-label-sm text-on-surface-variant" htmlFor="message_payload">MESSAGE_PAYLOAD // TEXT</label>
                   <div className="relative">
                     <span className="absolute left-3 top-3 font-label-md text-label-md text-primary">&gt;</span>
-                    <textarea className="w-full bg-surface-container-lowest border border-outline-variant pl-8 pr-4 py-3 font-label-md text-label-md text-on-surface focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary rounded-none transition-all placeholder:text-outline-variant resize-none" id="message_payload" placeholder="ENTER_TRANSMISSION_DATA..." rows="5"></textarea>
+                    <textarea 
+                      className="w-full bg-surface-container-lowest border border-outline-variant pl-8 pr-4 py-3 font-label-md text-label-md text-on-surface focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary rounded-none transition-all placeholder:text-outline-variant resize-none" 
+                      id="message_payload" 
+                      name="message"
+                      value={formData.message}
+                      onChange={handleChange}
+                      placeholder="ENTER_TRANSMISSION_DATA..." 
+                      rows="5"
+                      disabled={status === 'TRANSMITTING'}
+                    ></textarea>
                   </div>
                 </div>
-                <button className="mt-stack-sm self-start bg-on-surface text-surface hover:bg-primary hover:text-on-primary px-6 py-3 font-label-md text-label-md border border-on-surface transition-colors flex items-center gap-2" type="submit">
-                  <span className="material-symbols-outlined text-[16px]">send</span> [ EXECUTE_TRANSMISSION ]
+                <button 
+                  disabled={status === 'TRANSMITTING'}
+                  className={`mt-stack-sm self-start px-6 py-3 font-label-md text-label-md border transition-colors flex items-center gap-2 ${
+                    status === 'TRANSMITTING' ? 'bg-surface-variant text-on-surface-variant border-outline-variant cursor-not-allowed' :
+                    status === 'SUCCESS' ? 'bg-primary-container text-on-primary-container border-primary-container' :
+                    status === 'ERROR' ? 'bg-error text-white border-error' :
+                    'bg-on-surface text-surface hover:bg-primary hover:text-on-primary border-on-surface'
+                  }`} 
+                  type="submit"
+                >
+                  <span className={`material-symbols-outlined text-[16px] ${status === 'TRANSMITTING' ? 'animate-spin' : ''}`}>
+                    {status === 'TRANSMITTING' ? 'sync' : status === 'SUCCESS' ? 'check_circle' : status === 'ERROR' ? 'error' : 'send'}
+                  </span> 
+                  {status === 'TRANSMITTING' ? '[ TRANSMITTING_DATA... ]' : '[ EXECUTE_TRANSMISSION ]'}
                 </button>
               </form>
             </div>
@@ -90,10 +185,17 @@ export default function Contact() {
             {/* System Logs */}
             <div className="mt-auto pt-stack-md border-t border-outline-variant/50">
               <div className="font-label-sm text-label-sm text-on-surface-variant mb-unit">SYSTEM_LOG:</div>
-              <div className="flex flex-col gap-1 font-label-md text-label-md text-primary opacity-80">
-                <div><span className="opacity-50">0x00A1:</span> ESTABLISHING SECURE CONNECTION...</div>
-                <div><span className="opacity-50">0x00A2:</span> VERIFYING PROTOCOLS... OK</div>
-                <div className="text-on-surface"><span className="opacity-50 text-primary">0x00A3:</span> READY FOR USER INPUT_<span className="animate-pulse">_</span></div>
+              <div ref={logContainerRef} className="flex flex-col gap-1 font-label-md text-label-md text-primary opacity-80 max-h-32 overflow-y-auto custom-scrollbar pr-2">
+                {logs.map((log, idx) => {
+                  const isLast = idx === logs.length - 1;
+                  const isError = log.includes('ERROR');
+                  return (
+                    <div key={idx} className={`${isLast ? 'text-on-surface' : ''} ${isError ? 'text-error' : ''}`}>
+                      <span className="opacity-50">{log.split(': ')[0]}:</span> {log.split(': ')[1] || log}
+                      {isLast && status !== 'TRANSMITTING' && <span className="animate-pulse">_</span>}
+                    </div>
+                  );
+                })}
               </div>
             </div>
           </div>
