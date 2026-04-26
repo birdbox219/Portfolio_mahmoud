@@ -18,8 +18,8 @@ const itemVariants = {
 export default function About() {
   return (
     <PageWrapper>
-      <main className="md:ml-64 pt-24 pb-20 px-margin flex justify-center min-h-screen">
-        <div className="w-full max-w-[container-max] flex flex-col gap-stack-lg">
+      <main className="md:ml-64 pt-24 pb-20 px-4 md:px-margin flex justify-center min-h-screen">
+        <div className="w-full max-w-container-max flex flex-col gap-stack-lg">
           {/* Page Header */}
           <header className="border-b border-outline-variant pb-stack-md flex justify-between items-end">
             <div>

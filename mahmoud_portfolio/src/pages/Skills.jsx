@@ -24,7 +24,7 @@ const itemVariants = {
 export default function Skills() {
   return (
     <PageWrapper>
-      <main className="flex-1 p-margin pt-24 md:pl-64 max-w-container-max mx-auto w-full min-h-screen">
+      <main className="flex-1 px-4 md:pr-margin md:pl-[calc(256px+32px)] pt-24 max-w-container-max mx-auto w-full min-h-screen">
         <div className="mb-stack-lg">
           <h1 className="font-headline-lg text-headline-lg text-on-surface mb-unit uppercase border-b border-outline-variant pb-2 inline-block">
             <Typewriter text="SYSTEM_STATUS" />

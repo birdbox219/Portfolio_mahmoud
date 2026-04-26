@@ -1,35 +1,38 @@
+import resumePdf from './assets/Mahmoud_Elsayed_Unity_Resume.pdf';
+import profileImg from './assets/portfolio_image.jpg';
+
 export const PORTFOLIO_DATA = {
   // Global Operator Data
   operator: {
     name: "OPERATOR_042",
     status: "STATUS: OPERATIONAL",
     id: "ID_OP_042",
-    resumeUrl: "/resume.pdf", // PLACEHOLDER: Add your resume.pdf to the public folder
+    resumeUrl: resumePdf,
   },
 
   // Home Page Data
   home: {
     title: "M_a_h_m_o_u_d// DEV",
     subtitle: "GAME DEVELOPER",
-    bio: "Crafting digital experiences through technical precision and artistic intent.",
+    bio: "Building gameplay systems where mechanics and meaning evolve together.",
   },
 
   // Personnel Profile (About)
   about: {
-    image: "https://lh3.googleusercontent.com/aida-public/AB6AXuAb3oqYrohHM1mhQTCUxCWvuwnIDFePgVmH-BdQXdGxNpebOhe1uSBGY1MkFt3Scae-DisUP9axtWfOKsjyo7Fiy1yCMQyHSudaPTWCsld9mnVoNFKtyF-Jg_10jsIbLwNNg69AoBUXKYLG6_JUOOsiFiit6BL2R8qISB01FexaFUDpVrGrqAyHeKpXakWR3t5PvG-Bonp8l_X7PDQM6p1AzgHCKZxUFUtEiszSXIriSvMBAU3KMF4imfrwwRAUGW6BthAPnicCUZo",
+    image: profileImg,
     dataEntry01: {
       label: "UNIT_DESIGNATION",
       value: "GAME DEVELOPER"
     },
     dataEntry02: {
       label: "OPERATIONAL_FOCUS",
-      value: "IMMERSIVE_SYSTEMS"
+      value: "GAMEPLAY SYSTEMS & MULTIPLAYER"
     },
     biography: [
-      "Specialized in the architecture and deployment of high-fidelity immersive environments. Initial directives focused on foundational system stability and establishing core logic pathways for human-machine interfacing protocols.",
-      "Previous operational cycles include extensive deployments in spatial computing domains, optimizing rendering pipelines for minimal latency feedback loops. Current standing objective emphasizes the synthesis of tactical analog aesthetics with robust digital infrastructure to ensure persistent, reliable user interactions across variable network states."
+      "Unity Game Developer focused on building responsive gameplay systems, multiplayer interactions, and scalable mechanics using C#. Experience includes Unity Netcode, event-driven architecture, and performance-oriented design.",
+      "Developed multiple projects ranging from psychological puzzle games to multiplayer systems and experimental gameplay prototypes. Work emphasizes how mechanics shape player perception, not just interaction."
     ],
-    lastUpdated: "CYBER_EPOCH_994"
+    lastUpdated: "CYCLE_2026.4"
   },
 
   // System Status (Skills)
@@ -167,10 +170,11 @@ export const PORTFOLIO_DATA = {
   // Terminal Session (Contact)
   contact: {
     links: [
-      { name: "EMAIL", url: "mailto:operator@automata.os", icon: "mail" },
-      { name: "GITHUB", url: "https://github.com/", icon: "code" },
-      { name: "LINKEDIN", url: "https://linkedin.com/", icon: "work" },
-      { name: "FACEBOOK", url: "https://birdbox774.itch.io/", icon: "gamepad" }
+      { name: "EMAIL", url: "mailto:mahmodelsayed882@gmail.com", icon: "mail" },
+      { name: "GITHUB", url: "https://github.com/birdbox219", icon: "code" },
+      { name: "LINKEDIN", url: "https://www.linkedin.com/in/mahmoud-e-292b52322/", icon: "work" },
+      { name: "ITCH.IO", url: "https://birdbox774.itch.io/", icon: "gamepad" },
+      { name: "YOUTUBE", url: "https://www.youtube.com/@mahmodelsayed6199", icon: "smart_display" }
     ]
   }
 };

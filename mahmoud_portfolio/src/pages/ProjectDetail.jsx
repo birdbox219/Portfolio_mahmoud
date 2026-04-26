@@ -17,7 +17,7 @@ export default function ProjectDetail() {
 
   return (
     <PageWrapper>
-      <main className="md:ml-64 pt-24 pb-32 px-margin max-w-container-max min-h-screen flex flex-col gap-stack-lg mx-auto w-full">
+      <main className="md:ml-64 pt-24 pb-32 px-4 md:px-margin max-w-container-max min-h-screen flex flex-col gap-stack-lg mx-auto w-full">
         {/* Header Module */}
         <header className="mb-stack-lg">
           <div className="font-label-md text-label-md text-on-surface-variant mb-stack-sm flex items-center gap-2">

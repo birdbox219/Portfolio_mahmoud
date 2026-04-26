@@ -21,7 +21,7 @@ const itemVariants = {
 export default function Home() {
   return (
     <PageWrapper>
-      <main className="effect-scanlines flex-grow pt-[80px] md:pl-[256px] pb-[40px] flex items-center min-h-screen px-margin overflow-hidden relative">
+      <main className="effect-scanlines flex-grow pt-[80px] pb-[40px] flex items-center min-h-screen px-4 md:pr-margin md:pl-[calc(256px+32px)] overflow-hidden relative">
         <div className="max-w-container-max w-full flex justify-between items-center relative">
           <motion.div 
             className="flex flex-col gap-stack-lg max-w-3xl"

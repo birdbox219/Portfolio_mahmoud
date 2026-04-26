@@ -93,7 +93,7 @@ export default function GameLauncher() {
 
   return (
     <PageWrapper>
-      <main className="md:ml-64 pt-20 pb-10 px-margin max-w-container-max min-h-screen flex flex-col mx-auto w-full">
+      <main className="md:ml-64 pt-20 pb-10 px-4 md:px-margin max-w-container-max min-h-screen flex flex-col mx-auto w-full">
         {/* Header */}
         <div className="mb-4 flex items-center justify-between">
           <div>
@@ -141,29 +141,33 @@ export default function GameLauncher() {
               ></div>
 
               <div className="relative z-10 flex flex-col items-center gap-6 max-w-md text-center">
-                {/* Game icon */}
-                <div className="w-20 h-20 border border-outline-variant bg-surface-container flex items-center justify-center">
-                  <span className="material-symbols-outlined text-primary text-[36px]">sports_esports</span>
+                {/* Game icon / Error Icon */}
+                <div className={`w-20 h-20 border flex items-center justify-center ${isMobile ? 'border-error bg-error/10' : 'border-outline-variant bg-surface-container'}`}>
+                  <span className={`material-symbols-outlined text-[36px] ${isMobile ? 'text-error' : 'text-primary'}`}>
+                    {isMobile ? 'report_problem' : 'sports_esports'}
+                  </span>
                 </div>
 
                 <div>
-                  <h2 className="font-label-md text-label-md text-on-surface uppercase tracking-widest mb-2">{project.title}</h2>
+                  <h2 className={`font-label-md text-label-md uppercase tracking-widest mb-2 ${isMobile ? 'text-error' : 'text-on-surface'}`}>
+                    {isMobile ? 'HARDWARE_INCOMPATIBILITY' : project.title}
+                  </h2>
                   <div className="font-label-sm text-label-sm text-on-surface-variant uppercase">
-                    {detail.classType} // {project.category}
+                    {isMobile ? 'CRITICAL_ERROR: TOUCH_INTERFACE_NOT_SUPPORTED' : `${detail.classType} // ${project.category}`}
                   </div>
                 </div>
 
                 {/* System warning */}
-                <div className="w-full p-3 bg-surface-container-low border-l-2 border-secondary text-left">
-                  <p className="font-label-sm text-label-sm text-on-surface-variant">
+                <div className={`w-full p-4 border-l-2 text-left ${isMobile ? 'bg-error/5 border-error' : 'bg-surface-container-low border-secondary'}`}>
+                  <p className={`font-label-sm text-label-sm ${isMobile ? 'text-error' : 'text-on-surface-variant'}`}>
                     {isMobile
-                      ? "⚠ THIS MODULE IS OPTIMIZED FOR DESKTOP BROWSERS"
+                      ? "ERROR_LOG: This simulation requires a high-precision physical input device (Keyboard/Mouse). Mobile hardware has been detected. Stability and control cannot be guaranteed."
                       : `⚠ ESTIMATED LOAD TIME: ${detail.estimatedLoadTime}`
                     }
                   </p>
                 </div>
 
-                {/* Controls preview */}
+                {/* Controls preview - only for desktop */}
                 {!isMobile && detail.controls.length > 0 && (
                   <div className="w-full p-3 bg-surface-container-low border border-outline-variant">
                     <div className="font-label-sm text-label-sm text-on-surface-variant mb-2 uppercase tracking-wider">CONTROL_SCHEMA:</div>
@@ -187,22 +191,18 @@ export default function GameLauncher() {
                 {/* Execute button */}
                 <button
                   onClick={handleExecute}
-                  className="bg-on-surface text-surface px-8 py-4 font-label-md text-label-md border border-on-surface hover:bg-primary hover:text-on-primary transition-all flex items-center gap-3 group"
+                  className={`${isMobile ? 'bg-error text-white border-error hover:bg-error/90' : 'bg-on-surface text-surface border-on-surface hover:bg-primary hover:text-on-primary'} px-8 py-4 font-label-md text-label-md border transition-all flex items-center gap-3 group`}
                 >
-                  <span className="material-symbols-outlined text-[20px] group-hover:translate-x-0.5 transition-transform">play_arrow</span>
-                  {isMobile ? "[ OPEN_ON_ITCH.IO ]" : "[ INITIALIZE_SIMULATION ]"}
+                  <span className="material-symbols-outlined text-[20px] group-hover:translate-x-0.5 transition-transform">
+                    {isMobile ? 'launch' : 'play_arrow'}
+                  </span>
+                  {isMobile ? "[ EXTERNAL_VIEW_ARCHIVE ]" : "[ INITIALIZE_SIMULATION ]"}
                 </button>
 
-                {/* Itch.io fallback link */}
-                <a
-                  href={detail.itchUrl}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="font-label-sm text-label-sm text-on-surface-variant hover:text-primary transition-colors flex items-center gap-1 underline-offset-4 hover:underline"
-                >
-                  <span className="material-symbols-outlined text-[12px]">open_in_new</span>
-                  VIEW_ON_ITCH.IO
-                </a>
+                {/* Info Text */}
+                <p className="font-label-sm text-label-sm text-on-surface-variant uppercase tracking-tighter opacity-60">
+                  {isMobile ? "MODULE_UNAVAILABLE_ON_CURRENT_HARDWARE" : "VERIFYING_PERIPHERALS_STATUS... READY"}
+                </p>
               </div>
             </div>
           )}

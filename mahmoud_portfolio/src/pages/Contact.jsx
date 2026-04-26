@@ -5,7 +5,7 @@ export default function Contact() {
   return (
     <PageWrapper>
     <main className="pt-[80px] md:pl-64 min-h-screen pb-[60px] relative">
-      <div className="p-margin max-w-container-max mx-auto h-full flex flex-col">
+      <div className="px-4 md:px-margin max-w-container-max mx-auto h-full flex flex-col">
         {/* Context Header */}
         <div className="mb-stack-lg border-b border-outline-variant pb-stack-sm flex justify-between items-end">
           <div>

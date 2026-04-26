@@ -21,7 +21,7 @@ export default function Projects() {
   return (
     <PageWrapper>
       <main className="flex-grow pt-[80px] md:pl-64 pb-20 md:pb-[40px] flex justify-center bg-background min-h-screen">
-        <div className="max-w-[1280px] w-full p-margin">
+        <div className="max-w-[1280px] w-full px-4 md:px-margin">
           <header className="mb-stack-lg border-b border-outline-variant pb-stack-sm">
             <h1 className="font-headline-lg text-headline-lg text-on-background tracking-widest uppercase">
               <Typewriter text="DATA_ARCHIVE // PROJECT_FILES" />

@@ -5,10 +5,20 @@ import { useAudio } from '../context/AudioContext';
 export default function CustomCursor() {
   const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
   const [isHovering, setIsHovering] = useState(false);
+  const [isMobile, setIsMobile] = useState(false);
   const { playHover, playClick } = useAudio();
 
   useEffect(() => {
+    // Check if it's a touch device or small screen
+    const checkMobile = () => {
+      setIsMobile(window.matchMedia('(max-width: 768px)').matches || 'ontouchstart' in window);
+    };
+
+    checkMobile();
+    window.addEventListener('resize', checkMobile);
+
     const updateMousePosition = (e) => {
+      if (isMobile) return;
       setMousePosition({ x: e.clientX, y: e.clientY });
     };
 
@@ -36,11 +46,14 @@ export default function CustomCursor() {
     window.addEventListener('click', handleMouseClick);
 
     return () => {
+      window.removeEventListener('resize', checkMobile);
       window.removeEventListener('mousemove', updateMousePosition);
       window.removeEventListener('mouseover', handleMouseOver);
       window.removeEventListener('click', handleMouseClick);
     };
-  }, [playHover, playClick]);
+  }, [playHover, playClick, isMobile]);
+
+  if (isMobile) return null;
 
   return (
     <motion.div
