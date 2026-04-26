@@ -7,6 +7,7 @@ import Projects from './pages/Projects';
 import ProjectDetail from './pages/ProjectDetail';
 import Contact from './pages/Contact';
 import GameLauncher from './pages/GameLauncher';
+import NotFound from './pages/NotFound';
 import { AudioProvider } from './context/AudioContext';
 import CustomCursor from './components/CustomCursor';
 
@@ -24,6 +25,7 @@ export default function App() {
             <Route path="projects/:id" element={<ProjectDetail />} />
             <Route path="play/:id" element={<GameLauncher />} />
             <Route path="terminal" element={<Contact />} />
+            <Route path="*" element={<NotFound />} />
           </Route>
         </Routes>
       </BrowserRouter>
