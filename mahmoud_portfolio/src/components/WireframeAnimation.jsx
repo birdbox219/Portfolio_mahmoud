@@ -1,6 +1,9 @@
 import { motion } from 'framer-motion';
+import useMousePosition from '../hooks/useMousePosition';
 
 export default function WireframeAnimation() {
+  const { x, y } = useMousePosition();
+  
   const faceBaseClass = "absolute w-full h-full border border-outline-variant/80 bg-surface-container-lowest/5 flex items-center justify-center";
   
   const InnerSquare = () => <div className="w-[60%] h-[60%] border border-outline-variant/50 flex items-center justify-center">
@@ -8,7 +11,17 @@ export default function WireframeAnimation() {
   </div>;
 
   return (
-    <div className="relative w-full h-full flex items-center justify-center opacity-60 pointer-events-none" style={{ perspective: '1200px' }}>
+    <motion.div 
+      className="relative w-full h-full flex items-center justify-center opacity-60 pointer-events-none" 
+      style={{ perspective: '1200px' }}
+      animate={{
+        x: x * -20, // Opposite direction parallax
+        y: y * -20,
+        rotateX: y * 10,
+        rotateY: x * -10
+      }}
+      transition={{ type: "spring", stiffness: 50, damping: 20 }}
+    >
       
       {/* Decorative vertical lines */}
       <div className="absolute right-4 top-0 h-full w-[1px] bg-gradient-to-b from-transparent via-outline-variant/30 to-transparent" />
@@ -77,6 +90,6 @@ export default function WireframeAnimation() {
       <div className="absolute left-1/4 top-1/4 w-4 h-4 border-l border-t border-outline-variant/40" />
       <div className="absolute left-1/4 bottom-1/4 w-4 h-4 border-l border-b border-outline-variant/40" />
       
-    </div>
+    </motion.div>
   );
 }

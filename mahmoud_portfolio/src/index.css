@@ -3,6 +3,9 @@
 @tailwind utilities;
 
 @layer base {
+  * {
+    cursor: none !important;
+  }
   body {
     @apply bg-background text-on-background antialiased min-h-screen flex flex-col selection:bg-primary-container selection:text-on-primary-container overflow-x-hidden;
   }
