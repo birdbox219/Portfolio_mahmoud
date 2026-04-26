@@ -111,7 +111,7 @@ export const PORTFOLIO_DATA = {
     {
       id: "003",
       title: "UNDERT_THE_TREE",
-      category: "Platfromer",
+      category: "Platformer",
       status: "ACTIVE",
       image: "https://img.itch.zone/aW1nLzI0NjQ4NDA4LnBuZw==/315x250%23c/iVfoUq.png",
       detail: {
@@ -130,7 +130,7 @@ export const PORTFOLIO_DATA = {
         controls: [
           { key: "WASD", action: "MOVE" },
           { key: "SPACE", action: "JUMP" },
-          { key: "E", action: "SWICH CHARACTER" }
+          { key: "E", action: "SWITCH CHARACTER" }
         ],
         gamepadSupported: true,
         systemRequirements: "DESKTOP_ONLY",
@@ -148,7 +148,7 @@ export const PORTFOLIO_DATA = {
         classType: "MULTIPLAYER_BOARD_Engine",
         overview: "A multiplayer board game platform focused on creating and experimenting with dynamic rule systems.",
         objective: "Allow players to design and play custom board game modes with flexible mechanics.",
-        operatorRole: "ultiplayer Systems Developer",
+        operatorRole: "Multiplayer Systems Developer",
         techStack: ["Unity", "C#", "Unity Netcode"],
         detailImage: "https://i.postimg.cc/85vS1xnp/Screenshot-2026-02-23-171506.png",
         anomalyReport: "Static rule sets reduced replayability.",

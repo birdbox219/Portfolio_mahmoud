@@ -1,4 +1,4 @@
-import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import { HashRouter, Routes, Route } from 'react-router-dom';
 import Layout from './components/Layout';
 import Home from './pages/Home';
 import About from './pages/About';
@@ -14,7 +14,7 @@ import CustomCursor from './components/CustomCursor';
 export default function App() {
   return (
     <AudioProvider>
-      <BrowserRouter>
+      <HashRouter>
         <CustomCursor />
         <Routes>
           <Route path="/" element={<Layout />}>
@@ -28,7 +28,7 @@ export default function App() {
             <Route path="*" element={<NotFound />} />
           </Route>
         </Routes>
-      </BrowserRouter>
+      </HashRouter>
     </AudioProvider>
   );
 }
