@@ -34,7 +34,7 @@ export default function TopNavBar() {
           </button>
 
           <span className="text-sm md:text-lg font-bold tracking-widest text-[#4A4941] dark:text-[#DCD8C0] whitespace-nowrap">
-            MAHMOUD_OS <span className="hidden sm:inline">// PORTFOLIO</span>
+            MAHMOUD_ELSAIED <span className="hidden sm:inline">// PORTFOLIO</span>
           </span>
         </div>
 
@@ -104,8 +104,8 @@ export default function TopNavBar() {
                           to={item.path}
                           onClick={() => setIsMenuOpen(false)}
                           className={`flex items-center gap-4 p-4 rounded-DEFAULT transition-all font-['Space_Grotesk'] uppercase tracking-[0.2em] text-sm ${active
-                              ? 'bg-[#4A4941] text-[#F2F1E8] dark:bg-[#DCD8C0] dark:text-[#1A1915]'
-                              : 'text-[#4A4941]/70 dark:text-[#DCD8C0]/60 hover:bg-[#DCD8C0]/40 dark:hover:bg-[#4A4941]/40'
+                            ? 'bg-[#4A4941] text-[#F2F1E8] dark:bg-[#DCD8C0] dark:text-[#1A1915]'
+                            : 'text-[#4A4941]/70 dark:text-[#DCD8C0]/60 hover:bg-[#DCD8C0]/40 dark:hover:bg-[#4A4941]/40'
                             }`}
                         >
                           <span className="material-symbols-outlined text-[24px]">
