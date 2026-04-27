@@ -5,7 +5,7 @@ import { PORTFOLIO_DATA } from '../data';
 const navItems = [
   { path: '/', label: 'SYSTEM_BOOT', icon: 'power_settings_new' },
   { path: '/projects', label: 'DATA_ARCHIVE', icon: 'folder_open' },
-  { path: '/projects/001', label: 'PROJECT_LOG', icon: 'receipt_long' },
+  { path: '/log', label: 'PROJECT_LOG', icon: 'receipt_long' },
   { path: '/skills', label: 'SYSTEM_STATUS', icon: 'analytics' },
   { path: '/profile', label: 'PERSONNEL_PROFILE', icon: 'account_circle' },
   { path: '/terminal', label: 'TERMINAL_SESSION', icon: 'terminal' },

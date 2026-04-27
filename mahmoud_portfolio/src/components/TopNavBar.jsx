@@ -7,6 +7,7 @@ import { motion, AnimatePresence } from 'framer-motion';
 const navItems = [
   { path: '/', label: 'SYSTEM_BOOT', icon: 'power_settings_new' },
   { path: '/projects', label: 'DATA_ARCHIVE', icon: 'folder_open' },
+  { path: '/log', label: 'PROJECT_LOG', icon: 'receipt_long' },
   { path: '/skills', label: 'SYSTEM_STATUS', icon: 'analytics' },
   { path: '/profile', label: 'PERSONNEL_PROFILE', icon: 'account_circle' },
   { path: '/terminal', label: 'TERMINAL_SESSION', icon: 'terminal' },

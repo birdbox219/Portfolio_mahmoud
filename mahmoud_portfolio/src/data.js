@@ -167,6 +167,34 @@ export const PORTFOLIO_DATA = {
     }
   ],
 
+  // Project Log (Career Timeline)
+  projectLog: [
+    {
+      id: "LOG_01",
+      date: "CYCLE_2026.1 - PRESENT",
+      role: "SENIOR GAME DEVELOPER",
+      company: "YORHA SYSTEMS",
+      historyText: "Leading the development of experimental gameplay mechanics and multiplayer synchronization systems. Focused on optimizing network performance and player interaction fidelity.",
+      image: "https://images.unsplash.com/photo-1550745165-9bc0b252726f?auto=format&fit=crop&q=80&w=400&h=400"
+    },
+    {
+      id: "LOG_02",
+      date: "CYCLE_2025.4 - 2025.12",
+      role: "SYSTEMS ENGINEER",
+      company: "BUNKER_TECH",
+      historyText: "Architected core systems for state-driven puzzles and procedural environment generation. Improved asset loading efficiency by 40% using custom serialization methods.",
+      image: "https://images.unsplash.com/photo-1518770660439-4636190af475?auto=format&fit=crop&q=80&w=400&h=400"
+    },
+    {
+      id: "LOG_03",
+      date: "CYCLE_2024.2 - 2025.3",
+      role: "JUNIOR DEVELOPER",
+      company: "RESISTANCE_CAMP",
+      historyText: "Implemented UI/UX components and localized gameplay systems. Collaborated with designers to translate complex mechanics into intuitive player feedback loops.",
+      image: "https://images.unsplash.com/photo-1555066931-4365d14bab8c?auto=format&fit=crop&q=80&w=400&h=400"
+    }
+  ],
+
   // Terminal Session (Contact)
   contact: {
     links: [

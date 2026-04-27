@@ -1,3 +1,4 @@
+import { useEffect } from 'react';
 import { useParams, Navigate, Link } from 'react-router-dom';
 import PageWrapper from '../components/PageWrapper';
 import { PORTFOLIO_DATA } from '../data';
@@ -5,13 +6,21 @@ import { PORTFOLIO_DATA } from '../data';
 export default function ProjectDetail() {
   const { id } = useParams();
   
-  // Find the specific project by ID
-  const project = PORTFOLIO_DATA.projects.find(p => p.id === id);
+  // Scroll to top when navigating between projects
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, [id]);
+
+  const currentIndex = PORTFOLIO_DATA.projects.findIndex(p => p.id === id);
+  const project = PORTFOLIO_DATA.projects[currentIndex];
 
   // If project is not found, we could redirect or show a 404. Let's just fallback or redirect.
   if (!project) {
     return <Navigate to="/projects" replace />;
   }
+
+  const prevProject = currentIndex > 0 ? PORTFOLIO_DATA.projects[currentIndex - 1] : null;
+  const nextProject = currentIndex < PORTFOLIO_DATA.projects.length - 1 ? PORTFOLIO_DATA.projects[currentIndex + 1] : null;
 
   const { detail } = project;
 
@@ -167,7 +176,34 @@ export default function ProjectDetail() {
           </div>
         </section>
 
-        <div className="border-t border-outline-variant mt-stack-lg pt-stack-sm text-center">
+        {/* Navigation Controls */}
+        <div className="border-t border-outline-variant py-stack-md grid grid-cols-1 md:grid-cols-3 gap-4 mt-stack-sm items-center">
+          <div className="flex justify-center md:justify-start order-2 md:order-1">
+            {prevProject && (
+              <Link to={`/projects/${prevProject.id}`} className="font-label-md text-label-md text-on-surface hover:text-primary hover:bg-surface-container-low px-4 py-2 border border-transparent hover:border-outline-variant transition-all flex items-center gap-2 w-full md:w-auto justify-center">
+                <span className="material-symbols-outlined text-[16px]">chevron_left</span>
+                [ PREV_RECORD: {prevProject.id} ]
+              </Link>
+            )}
+          </div>
+          
+          <div className="flex justify-center order-1 md:order-2 mb-4 md:mb-0">
+            <Link to="/projects" className="font-label-md text-label-md text-on-surface-variant hover:text-on-surface transition-colors px-4 py-2 border border-outline-variant md:border-transparent hover:border-outline-variant w-full md:w-auto text-center">
+              [ RETURN_TO_ARCHIVE ]
+            </Link>
+          </div>
+
+          <div className="flex justify-center md:justify-end order-3 md:order-3">
+            {nextProject && (
+              <Link to={`/projects/${nextProject.id}`} className="font-label-md text-label-md text-on-surface hover:text-primary hover:bg-surface-container-low px-4 py-2 border border-transparent hover:border-outline-variant transition-all flex items-center gap-2 w-full md:w-auto justify-center">
+                [ NEXT_RECORD: {nextProject.id} ]
+                <span className="material-symbols-outlined text-[16px]">chevron_right</span>
+              </Link>
+            )}
+          </div>
+        </div>
+
+        <div className="border-t border-outline-variant mt-stack-md pt-stack-sm text-center">
           <p className="font-label-sm text-label-sm text-outline">END OF FILE</p>
         </div>
       </main>
