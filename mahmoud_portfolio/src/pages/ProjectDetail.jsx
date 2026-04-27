@@ -1,15 +1,9 @@
-import { useEffect } from 'react';
 import { useParams, Navigate, Link } from 'react-router-dom';
 import PageWrapper from '../components/PageWrapper';
 import { PORTFOLIO_DATA } from '../data';
 
 export default function ProjectDetail() {
   const { id } = useParams();
-  
-  // Scroll to top when navigating between projects
-  useEffect(() => {
-    window.scrollTo(0, 0);
-  }, [id]);
 
   const currentIndex = PORTFOLIO_DATA.projects.findIndex(p => p.id === id);
   const project = PORTFOLIO_DATA.projects[currentIndex];
