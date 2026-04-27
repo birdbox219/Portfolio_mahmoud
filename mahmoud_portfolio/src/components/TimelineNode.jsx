@@ -30,6 +30,7 @@ export default function TimelineNode({ node, isLast }) {
           <div className="w-full md:w-64 aspect-square border-b md:border-b-0 md:border-r border-[#4A4941]/20 dark:border-[#DCD8C0]/10 overflow-hidden relative">
             <img 
               src={node.image} 
+              loading="lazy"
               alt={node.company} 
               className="w-full h-full object-cover opacity-80 group-hover:opacity-100 transition-opacity duration-500 grayscale group-hover:grayscale-0"
             />

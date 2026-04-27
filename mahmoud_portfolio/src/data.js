@@ -1,5 +1,6 @@
 import resumePdf from './assets/Mahmoud_Elsayed_Unity_Resume.pdf';
 import profileImg from './assets/portfolio_image.jpg';
+import log3Img from './assets/Log_3_image.jpg';
 
 export const PORTFOLIO_DATA = {
   // Global Operator Data
@@ -171,27 +172,36 @@ export const PORTFOLIO_DATA = {
   projectLog: [
     {
       id: "LOG_01",
-      date: "CYCLE_2026.1 - PRESENT",
-      role: "SENIOR GAME DEVELOPER",
-      company: "YORHA SYSTEMS",
-      historyText: "Leading the development of experimental gameplay mechanics and multiplayer synchronization systems. Focused on optimizing network performance and player interaction fidelity.",
-      image: "https://images.unsplash.com/photo-1550745165-9bc0b252726f?auto=format&fit=crop&q=80&w=400&h=400"
+      date: "CYCLE_2026.3 - PRESENT",
+      role: "Game developer intern",
+      company: "Al Arcade Studio ",
+      historyText: "After getting first place On a game jam competition for multiplayer XO i managed to join Al Arcade Studio as a game developer intern in 2026",
+      image: "https://scontent.fcai19-7.fna.fbcdn.net/v/t39.30808-6/456448375_477343695145102_5825519036298640859_n.jpg?_nc_cat=111&ccb=1-7&_nc_sid=1d70fc&_nc_eui2=AeEP3jZ9tvT1etnUNInvk5rywVWKMbLqJyLBVYoxsuonInRfMY8Wr3KF2JEFqcWeHS1KT3qoSAISoFKoORVfwbCV&_nc_ohc=al9ZXnPT6x8Q7kNvwEAF1vb&_nc_oc=AdpQaIe8bha7LKpxMjaQOzuLSO3jWxUXkLZDMoHjfDMf_n9uSVFwkyXwnOFsiCZxzfc&_nc_zt=23&_nc_ht=scontent.fcai19-7.fna&_nc_gid=i_QGFADVkO7fjwEANCJKKw&_nc_ss=7b2a8&oh=00_Af2RpNlqTtaPqxmYEJAQI92F3qxVpNPUe4gXNYNb53LxNg&oe=69F4EBC6"
     },
     {
       id: "LOG_02",
-      date: "CYCLE_2025.4 - 2025.12",
-      role: "SYSTEMS ENGINEER",
-      company: "BUNKER_TECH",
-      historyText: "Architected core systems for state-driven puzzles and procedural environment generation. Improved asset loading efficiency by 40% using custom serialization methods.",
+      date: "CYCLE_2026.1 - 2026.2",
+      role: "Event Orgnizer ",
+      company: "FCAI-GD",
+      historyText: "As an event organizer, I was core event orgnizer for FCAI Game Developers Club, coordinating with teams to deliver memorable experiences for participants , and wining first place in the game jam along the way",
       image: "https://images.unsplash.com/photo-1518770660439-4636190af475?auto=format&fit=crop&q=80&w=400&h=400"
     },
     {
       id: "LOG_03",
-      date: "CYCLE_2024.2 - 2025.3",
-      role: "JUNIOR DEVELOPER",
-      company: "RESISTANCE_CAMP",
-      historyText: "Implemented UI/UX components and localized gameplay systems. Collaborated with designers to translate complex mechanics into intuitive player feedback loops.",
-      image: "https://images.unsplash.com/photo-1555066931-4365d14bab8c?auto=format&fit=crop&q=80&w=400&h=400"
+      date: "CYCLE_2025.11 - 2025.12",
+      role: "Course participant ",
+      company: "FCAI-GD - game development course",
+      historyText: "One of the best courses i have ever attended , it made me love game development and want to pursue it as a career , wining the 3st place in the course",
+      image: log3Img
+    },
+
+    {
+      id: "LOG_04",
+      date: "CYCLE_2025.7 - 2025.10",
+      role: "Pen testing & reverse engineering intern",
+      company: "FIXED SOLUTIONS",
+      historyText: "My curiosity about how software works led me to study reverse engineering and contribute to modding communities. Through this journey, I earned my first internship at FIXED SOLUTIONS, focusing on penetration testing and reverse engineering.",
+      image: "https://media.licdn.com/dms/image/v2/D5622AQHcTNeITM0DeQ/feedshare-shrink_2048_1536/B56Zh6qKoIHcAo-/0/1754404576107?e=1778716800&v=beta&t=SYJa2Pvzl01N5dWpHCFQoarpprIyKdVdA0DkzqttKDw"
     }
   ],
 
