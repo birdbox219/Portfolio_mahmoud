@@ -15,7 +15,7 @@ const containerVariants = {
 export default function ProjectLog() {
   return (
     <PageWrapper>
-      <main className="flex-grow pt-[80px] md:pl-64 pb-20 md:pb-[40px] flex justify-center bg-background min-h-screen overflow-x-hidden">
+      <main className="flex-grow pt-[80px] md:pl-64 pb-20 md:pb-[40px] flex justify-center min-h-screen overflow-x-hidden">
         <div className="max-w-[1280px] w-full px-4 md:px-margin">
           
           <header className="mb-stack-lg border-b border-outline-variant pb-stack-sm flex flex-col md:flex-row justify-between items-start md:items-end gap-4">
