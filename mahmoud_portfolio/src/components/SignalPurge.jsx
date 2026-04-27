@@ -42,6 +42,8 @@ export default function SignalPurge({ onWin, onFail }) {
     mouseDown: false,
     mouseX: 0, mouseY: 0,
     aimAngle: 0,
+    leftTouch: null,
+    rightTouch: null,
     // Arena (set on resize)
     arenaX: 0, arenaY: 0, arenaW: 0, arenaH: 0,
     // Entities
@@ -116,11 +118,46 @@ export default function SignalPurge({ onWin, onFail }) {
     const onMouseDown = () => { g.mouseDown = true; fireShot(); };
     const onMouseUp = () => { g.mouseDown = false; };
 
+    const onTouchStart = (e) => {
+      if (e.target.tagName !== 'A' && e.target.tagName !== 'BUTTON') e.preventDefault();
+      for (let i = 0; i < e.changedTouches.length; i++) {
+        const t = e.changedTouches[i];
+        if (t.clientX < window.innerWidth / 2) {
+          if (!g.leftTouch) g.leftTouch = { id: t.identifier, startX: t.clientX, startY: t.clientY, currentX: t.clientX, currentY: t.clientY };
+        } else {
+          if (!g.rightTouch) g.rightTouch = { id: t.identifier, startX: t.clientX, startY: t.clientY, currentX: t.clientX, currentY: t.clientY };
+        }
+      }
+    };
+    const onTouchMove = (e) => {
+      if (e.target.tagName !== 'A' && e.target.tagName !== 'BUTTON') e.preventDefault();
+      for (let i = 0; i < e.changedTouches.length; i++) {
+        const t = e.changedTouches[i];
+        if (g.leftTouch && t.identifier === g.leftTouch.id) {
+          g.leftTouch.currentX = t.clientX; g.leftTouch.currentY = t.clientY;
+        }
+        if (g.rightTouch && t.identifier === g.rightTouch.id) {
+          g.rightTouch.currentX = t.clientX; g.rightTouch.currentY = t.clientY;
+        }
+      }
+    };
+    const onTouchEnd = (e) => {
+      for (let i = 0; i < e.changedTouches.length; i++) {
+        const t = e.changedTouches[i];
+        if (g.leftTouch && t.identifier === g.leftTouch.id) g.leftTouch = null;
+        if (g.rightTouch && t.identifier === g.rightTouch.id) g.rightTouch = null;
+      }
+    };
+
     window.addEventListener('keydown', onKeyDown);
     window.addEventListener('keyup', onKeyUp);
     window.addEventListener('mousemove', onMouseMove);
     window.addEventListener('mousedown', onMouseDown);
     window.addEventListener('mouseup', onMouseUp);
+    window.addEventListener('touchstart', onTouchStart, { passive: false });
+    window.addEventListener('touchmove', onTouchMove, { passive: false });
+    window.addEventListener('touchend', onTouchEnd);
+    window.addEventListener('touchcancel', onTouchEnd);
 
     // ── Update ──
     const update = () => {
@@ -183,13 +220,32 @@ export default function SignalPurge({ onWin, onFail }) {
         if (k['KeyA'] || k['ArrowLeft'])  dx = -1;
         if (k['KeyD'] || k['ArrowRight']) dx = 1;
         if (dx !== 0 && dy !== 0) { dx *= 0.707; dy *= 0.707; }
+
+        if (g.leftTouch) {
+           const maxD = 40;
+           let tdx = g.leftTouch.currentX - g.leftTouch.startX;
+           let tdy = g.leftTouch.currentY - g.leftTouch.startY;
+           const dist = Math.sqrt(tdx*tdx + tdy*tdy);
+           if (dist > 0) {
+             const factor = Math.min(dist / maxD, 1);
+             dx = (tdx / dist) * factor;
+             dy = (tdy / dist) * factor;
+           }
+        }
+
         g.px += dx * PLAYER_SPEED;
         g.py += dy * PLAYER_SPEED;
         const half = PLAYER_SIZE / 2 + 2;
         g.px = Math.max(g.arenaX + half, Math.min(g.arenaX + g.arenaW - half, g.px));
         g.py = Math.max(g.arenaY + half, Math.min(g.arenaY + g.arenaH - half, g.py));
-        g.aimAngle = Math.atan2(g.mouseY - g.py, g.mouseX - g.px);
-        if (g.mouseDown) fireShot();
+        
+        if (g.rightTouch) {
+           g.aimAngle = Math.atan2(g.rightTouch.currentY - g.rightTouch.startY, g.rightTouch.currentX - g.rightTouch.startX);
+           fireShot();
+        } else {
+           g.aimAngle = Math.atan2(g.mouseY - g.py, g.mouseX - g.px);
+           if (g.mouseDown) fireShot();
+        }
         g.trail.push({ x: g.px, y: g.py, life: 1 });
         if (g.trail.length > 8) g.trail.shift();
         if (g.invulnFrames > 0) g.invulnFrames--;
@@ -605,8 +661,36 @@ export default function SignalPurge({ onWin, onFail }) {
       if (progress < 0.1) {
         const a = Math.max(0, 0.25 - progress * 2.5);
         ctx.fillStyle = `rgba(255,255,255,${a})`;
-        ctx.fillText('WASD: MOVE  |  MOUSE: AIM  |  CLICK/SPACE: FIRE', W / 2, g.arenaY + g.arenaH + 44);
+        const isMobile = 'ontouchstart' in window;
+        const hintText = isMobile ? 'DRAG LEFT TO MOVE  |  DRAG RIGHT TO AIM & FIRE' : 'WASD: MOVE  |  MOUSE: AIM  |  CLICK/SPACE: FIRE';
+        ctx.fillText(hintText, W / 2, g.arenaY + g.arenaH + 44);
       }
+
+      // ── Touch Joysticks ──
+      const drawJoystick = (touch) => {
+        if (!touch) return;
+        ctx.save();
+        ctx.strokeStyle = 'rgba(255,255,255,0.2)';
+        ctx.lineWidth = 2;
+        ctx.beginPath();
+        ctx.arc(touch.startX, touch.startY, 40, 0, Math.PI * 2);
+        ctx.stroke();
+        
+        let dx = touch.currentX - touch.startX;
+        let dy = touch.currentY - touch.startY;
+        const dist = Math.sqrt(dx*dx + dy*dy);
+        if (dist > 40) {
+          dx = (dx / dist) * 40;
+          dy = (dy / dist) * 40;
+        }
+        ctx.fillStyle = 'rgba(200,184,122,0.5)';
+        ctx.beginPath();
+        ctx.arc(touch.startX + dx, touch.startY + dy, 20, 0, Math.PI * 2);
+        ctx.fill();
+        ctx.restore();
+      };
+      drawJoystick(g.leftTouch);
+      drawJoystick(g.rightTouch);
 
       // ── Overlay ──
       if ((g.phase === 'WIN_ANIM' || g.phase === 'FAIL_ANIM') && g.overlayAlpha > 0) {
@@ -636,6 +720,10 @@ export default function SignalPurge({ onWin, onFail }) {
       window.removeEventListener('mousemove', onMouseMove);
       window.removeEventListener('mousedown', onMouseDown);
       window.removeEventListener('mouseup', onMouseUp);
+      window.removeEventListener('touchstart', onTouchStart);
+      window.removeEventListener('touchmove', onTouchMove);
+      window.removeEventListener('touchend', onTouchEnd);
+      window.removeEventListener('touchcancel', onTouchEnd);
     };
   }, [onWin, onFail]);
 

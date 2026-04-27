@@ -60,7 +60,7 @@ export default function Contact() {
         setLogs(prev => [...prev, `0x00E2: ERROR - ${result.message}`]);
         setTimeout(() => setStatus('IDLE'), 3000);
       }
-    } catch (error) {
+    } catch {
       setStatus('ERROR');
       setLogs(prev => [...prev, "0x00E3: CRITICAL NETWORK FAILURE."]);
       setTimeout(() => setStatus('IDLE'), 3000);
@@ -69,7 +69,7 @@ export default function Contact() {
 
   return (
     <PageWrapper>
-    <main className="pt-[80px] md:pl-64 min-h-screen pb-[60px] relative">
+    <main className="min-h-screen pb-[60px] relative">
       <div className="px-4 md:px-margin max-w-container-max mx-auto h-full flex flex-col">
         {/* Context Header */}
         <div className="mb-stack-lg border-b border-outline-variant pb-stack-sm flex justify-between items-end">

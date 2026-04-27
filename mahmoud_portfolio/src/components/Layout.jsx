@@ -21,9 +21,11 @@ export default function Layout() {
       <BackgroundWatermark />
       <TopNavBar />
       <SideNavBar />
-      <AnimatePresence mode="wait">
-        <Outlet key={location.pathname} />
-      </AnimatePresence>
+      <div className="md:pl-64 pt-20 flex flex-col min-h-screen">
+        <AnimatePresence mode="wait">
+          <Outlet key={location.pathname} />
+        </AnimatePresence>
+      </div>
       <Footer />
     </div>
   );

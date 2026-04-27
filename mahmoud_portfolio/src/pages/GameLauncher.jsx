@@ -33,27 +33,16 @@ export default function GameLauncher() {
     return () => window.removeEventListener('resize', checkMobile);
   }, []);
 
-  // If project not found or no embedUrl, redirect
-  if (!project) {
-    return <Navigate to="/projects" replace />;
-  }
-
-  if (!project.detail.embedUrl) {
-    // No web build — redirect to itch.io
-    window.open(project.detail.itchUrl, '_blank');
-    return <Navigate to={`/projects/${id}`} replace />;
-  }
-
-  const { detail } = project;
+  const detail = project?.detail;
 
   const handleExecute = () => {
     if (isMobile) {
-      window.open(detail.itchUrl, '_blank');
+      window.open(detail?.itchUrl, '_blank');
       return;
     }
     // Start loading the iframe immediately when user clicks run,
     // but show the boot sequence animation on top
-    setIframeSrc(detail.embedUrl);
+    setIframeSrc(detail?.embedUrl);
     setGameState(STATES.BOOTING);
   };
 
@@ -91,9 +80,20 @@ export default function GameLauncher() {
   // Determine if the iframe should be visible (only in RUNNING state)
   const iframeVisible = gameState === STATES.RUNNING;
 
+  // If project not found or no embedUrl, redirect
+  if (!project) {
+    return <Navigate to="/projects" replace />;
+  }
+
+  if (!project.detail.embedUrl) {
+    // No web build — redirect to itch.io
+    window.open(project.detail.itchUrl, '_blank');
+    return <Navigate to={`/projects/${id}`} replace />;
+  }
+
   return (
     <PageWrapper>
-      <main className="md:ml-64 pt-20 pb-10 px-4 md:px-margin max-w-container-max min-h-screen flex flex-col mx-auto w-full">
+      <main className="pb-10 px-4 md:px-margin max-w-container-max min-h-screen flex flex-col mx-auto w-full">
         {/* Header */}
         <div className="mb-4 flex items-center justify-between">
           <div>

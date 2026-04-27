@@ -37,7 +37,7 @@ export default function CustomCursor() {
       }
     };
 
-    const handleMouseClick = (e) => {
+    const handleMouseClick = () => {
       playClick();
     };
 

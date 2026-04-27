@@ -20,7 +20,7 @@ export default function ProjectDetail() {
 
   return (
     <PageWrapper>
-      <main className="md:ml-64 pt-24 pb-32 px-4 md:px-margin max-w-container-max min-h-screen flex flex-col gap-stack-lg mx-auto w-full">
+      <main className="pb-32 px-4 md:px-margin max-w-container-max min-h-screen flex flex-col gap-stack-lg mx-auto w-full">
         {/* Header Module */}
         <header className="mb-stack-lg">
           <div className="font-label-md text-label-md text-on-surface-variant mb-stack-sm flex items-center gap-2">
@@ -44,11 +44,11 @@ export default function ProjectDetail() {
 
         {/* Structured Vertical Sections */}
         {/* Section 01: Overview */}
-        <section className="border-t border-outline-variant py-stack-lg grid grid-cols-1 md:grid-cols-12 gap-gutter">
-          <div className="md:col-span-3">
+        <section className="border-t border-outline-variant py-stack-lg grid grid-cols-1 lg:grid-cols-12 gap-gutter">
+          <div className="lg:col-span-3">
             <h2 className="font-label-md text-label-md text-tertiary">01 // OVERVIEW</h2>
           </div>
-          <div className="md:col-span-9 max-w-3xl">
+          <div className="lg:col-span-9 max-w-3xl">
             <p className="font-body-lg text-body-lg text-on-surface mb-stack-md">
               {detail.overview}
             </p>
@@ -56,11 +56,11 @@ export default function ProjectDetail() {
         </section>
 
         {/* Section 02: Goal */}
-        <section className="border-t border-outline-variant py-stack-lg grid grid-cols-1 md:grid-cols-12 gap-gutter">
-          <div className="md:col-span-3">
+        <section className="border-t border-outline-variant py-stack-lg grid grid-cols-1 lg:grid-cols-12 gap-gutter">
+          <div className="lg:col-span-3">
             <h2 className="font-label-md text-label-md text-tertiary">02 // OBJECTIVE_PARAMETERS</h2>
           </div>
-          <div className="md:col-span-9 max-w-3xl">
+          <div className="lg:col-span-9 max-w-3xl">
             <p className="font-body-lg text-body-lg text-on-surface">
               {detail.objective}
             </p>
@@ -68,11 +68,11 @@ export default function ProjectDetail() {
         </section>
 
         {/* Section 03: Specifications (Role & Tech Stack) */}
-        <section className="border-t border-outline-variant py-stack-lg grid grid-cols-1 md:grid-cols-12 gap-gutter">
-          <div className="md:col-span-3">
+        <section className="border-t border-outline-variant py-stack-lg grid grid-cols-1 lg:grid-cols-12 gap-gutter">
+          <div className="lg:col-span-3">
             <h2 className="font-label-md text-label-md text-tertiary">03 // SPECIFICATIONS</h2>
           </div>
-          <div className="md:col-span-9 grid grid-cols-1 sm:grid-cols-2 gap-stack-lg">
+          <div className="lg:col-span-9 grid grid-cols-1 sm:grid-cols-2 gap-stack-lg">
             <div>
               <h3 className="font-label-sm text-label-sm text-on-surface-variant mb-stack-sm border-b border-outline-variant pb-1">OPERATOR_ROLE</h3>
               <p className="font-body-md text-body-md text-on-surface">{detail.operatorRole}</p>
@@ -91,11 +91,11 @@ export default function ProjectDetail() {
         </section>
 
         {/* Section 04: Visual Data (Media) */}
-        <section className="border-t border-outline-variant py-stack-lg grid grid-cols-1 md:grid-cols-12 gap-gutter">
-          <div className="md:col-span-3">
+        <section className="border-t border-outline-variant py-stack-lg grid grid-cols-1 lg:grid-cols-12 gap-gutter">
+          <div className="lg:col-span-3">
             <h2 className="font-label-md text-label-md text-tertiary mb-stack-md md:mb-0">04 // VISUAL_DATA_DUMP</h2>
           </div>
-          <div className="md:col-span-9">
+          <div className="lg:col-span-9">
             <div className="w-full aspect-video bg-surface-container-highest border border-outline-variant relative group overflow-hidden">
               <div className="absolute inset-0 opacity-10" style={{ backgroundImage: 'radial-gradient(#625f4e 1px, transparent 1px)', backgroundSize: '20px 20px' }}></div>
               <img alt="Visual Dump" className="w-full h-full object-cover mix-blend-luminosity opacity-80 filter contrast-125" src={detail.detailImage}/>
@@ -107,11 +107,11 @@ export default function ProjectDetail() {
         </section>
 
         {/* Section 05: Challenges */}
-        <section className="border-t border-outline-variant py-stack-lg grid grid-cols-1 md:grid-cols-12 gap-gutter">
-          <div className="md:col-span-3">
+        <section className="border-t border-outline-variant py-stack-lg grid grid-cols-1 lg:grid-cols-12 gap-gutter">
+          <div className="lg:col-span-3">
             <h2 className="font-label-md text-label-md text-tertiary">05 // ANOMALY_REPORT</h2>
           </div>
-          <div className="md:col-span-9 max-w-3xl flex flex-col gap-stack-md">
+          <div className="lg:col-span-9 max-w-3xl flex flex-col gap-stack-md">
             <p className="font-body-lg text-body-lg text-on-surface">
               {detail.anomalyReport}
             </p>
@@ -125,11 +125,11 @@ export default function ProjectDetail() {
         </section>
 
         {/* Section 06: Execute Module — shown on ALL projects */}
-        <section className="border-t border-outline-variant py-stack-lg grid grid-cols-1 md:grid-cols-12 gap-gutter">
-          <div className="md:col-span-3">
+        <section className="border-t border-outline-variant py-stack-lg grid grid-cols-1 lg:grid-cols-12 gap-gutter">
+          <div className="lg:col-span-3">
             <h2 className="font-label-md text-label-md text-tertiary">06 // EXECUTE_MODULE</h2>
           </div>
-          <div className="md:col-span-9 flex flex-col gap-stack-md">
+          <div className="lg:col-span-9 flex flex-col gap-stack-md">
             {/* Warning banner */}
             <div className="p-4 bg-surface-container-low border-l-2 border-secondary">
               <p className="font-label-sm text-label-sm text-on-surface-variant">

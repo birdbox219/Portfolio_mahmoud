@@ -15,7 +15,7 @@ const containerVariants = {
 export default function ProjectLog() {
   return (
     <PageWrapper>
-      <main className="flex-grow pt-[80px] md:pl-64 pb-20 md:pb-[40px] flex justify-center min-h-screen overflow-x-hidden">
+      <main className="flex-grow pb-20 md:pb-[40px] flex justify-center min-h-screen overflow-x-hidden">
         <div className="max-w-[1280px] w-full px-4 md:px-margin">
           
           <header className="mb-stack-lg border-b border-outline-variant pb-stack-sm flex flex-col md:flex-row justify-between items-start md:items-end gap-4">
@@ -27,10 +27,10 @@ export default function ProjectLog() {
             </div>
           </header>
 
-          <div className="grid grid-cols-1 md:grid-cols-12 gap-gutter items-start">
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-gutter items-start">
             {/* Timeline Column */}
             <motion.div 
-              className="md:col-span-8 lg:col-span-9 pt-10"
+              className="lg:col-span-9 pt-10"
               variants={containerVariants}
               initial="hidden"
               animate="visible"
@@ -49,7 +49,7 @@ export default function ProjectLog() {
               initial={{ opacity: 0, x: 20 }}
               animate={{ opacity: 1, x: 0 }}
               transition={{ delay: 0.3 }}
-              className="md:col-span-4 lg:col-span-3 flex flex-col gap-stack-md sticky top-[100px]"
+              className="lg:col-span-3 flex flex-col gap-stack-md sticky top-[100px]"
             >
               <div className="bg-surface border border-outline-variant p-6 rounded-DEFAULT shadow-sm relative overflow-hidden">
                 {/* Decorative Pattern */}

@@ -1,14 +1,16 @@
 import { motion } from 'framer-motion';
 import useMousePosition from '../hooks/useMousePosition';
 
+const faceBaseClass = "absolute w-full h-full border border-outline-variant/80 bg-surface-container-lowest/5 flex items-center justify-center";
+
+const InnerSquare = () => (
+  <div className="w-[60%] h-[60%] border border-outline-variant/50 flex items-center justify-center">
+    <div className="w-[20%] h-[20%] bg-outline-variant/20 rounded-full" />
+  </div>
+);
+
 export default function WireframeAnimation() {
   const { x, y } = useMousePosition();
-
-  const faceBaseClass = "absolute w-full h-full border border-outline-variant/80 bg-surface-container-lowest/5 flex items-center justify-center";
-
-  const InnerSquare = () => <div className="w-[60%] h-[60%] border border-outline-variant/50 flex items-center justify-center">
-    <div className="w-[20%] h-[20%] bg-outline-variant/20 rounded-full" />
-  </div>;
 
   return (
     <motion.div

@@ -56,17 +56,15 @@ const DecryptedText = ({ text, delay = 0, duration = 1000, className = "" }) => 
 
 // Dynamic Hex Dump Component
 const HexDump = () => {
-  const [lines, setLines] = useState([]);
+  const generateLines = () => {
+    return Array.from({length: 15}).map((_, i) => 
+      `0x${Math.random().toString(16).slice(2, 10).toUpperCase()} F${i % 9} ${Math.random() > 0.5 ? '00' : 'FF'} ${Math.random().toString(16).slice(2, 6).toUpperCase()}`
+    );
+  };
+
+  const [lines, setLines] = useState(generateLines);
 
   useEffect(() => {
-    const generateLines = () => {
-      return Array.from({length: 15}).map((_, i) => 
-        `0x${Math.random().toString(16).slice(2, 10).toUpperCase()} F${i % 9} ${Math.random() > 0.5 ? '00' : 'FF'} ${Math.random().toString(16).slice(2, 6).toUpperCase()}`
-      );
-    };
-    
-    setLines(generateLines());
-
     const interval = setInterval(() => {
       setLines(generateLines());
     }, 2000); // Update hex dump every 2 seconds for a live feel
@@ -123,7 +121,7 @@ export default function NotFound() {
 
   return (
     <PageWrapper>
-      <main className="flex-grow pt-[80px] md:pl-[256px] pb-[40px] flex items-center justify-center min-h-screen px-margin overflow-hidden relative">
+      <main className="flex-grow pb-[40px] flex items-center justify-center min-h-screen px-margin overflow-hidden relative">
         <HexDump />
         
         <motion.div 

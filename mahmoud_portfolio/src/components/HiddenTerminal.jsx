@@ -58,7 +58,7 @@ export default function HiddenTerminal() {
     setLogs([]);
 
     // Stagger boot lines
-    BOOT_LINES.forEach((line, i) => {
+    BOOT_LINES.forEach((line) => {
       setTimeout(() => {
         setLogs(prev => [...prev, { text: line.text, type: 'system' }]);
       }, line.delay);
@@ -75,7 +75,7 @@ export default function HiddenTerminal() {
       ]);
       setBooted(true);
     }, bootEndDelay);
-  }, [state.terminalOpen]);
+  }, [state.terminalOpen, state.hasWon, state.hasElevated]);
 
   // ── Auto-focus input ──
   useEffect(() => {

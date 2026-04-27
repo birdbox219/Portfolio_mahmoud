@@ -20,17 +20,17 @@ const cardVariants = {
 export default function Projects() {
   return (
     <PageWrapper>
-      <main className="flex-grow pt-[80px] md:pl-64 pb-20 md:pb-[40px] flex justify-center min-h-screen">
+      <main className="flex-grow pb-20 md:pb-10 flex justify-center min-h-screen">
         <div className="max-w-[1280px] w-full px-4 md:px-margin">
           <header className="mb-stack-lg border-b border-outline-variant pb-stack-sm">
             <h1 className="font-headline-lg text-headline-lg text-on-background tracking-widest uppercase">
               <Typewriter text="DATA_ARCHIVE // PROJECT_FILES" />
             </h1>
           </header>
-          <div className="grid grid-cols-1 md:grid-cols-12 gap-gutter items-start">
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-gutter items-start">
             {/* Projects Grid Area (Bento Layout) */}
             <motion.div 
-              className="md:col-span-8 lg:col-span-9 grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-gutter"
+              className="lg:col-span-9 grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-gutter"
               variants={containerVariants}
               initial="hidden"
               animate="visible"
@@ -75,7 +75,7 @@ export default function Projects() {
               initial={{ opacity: 0, x: 20 }}
               animate={{ opacity: 1, x: 0 }}
               transition={{ delay: 0.3 }}
-              className="md:col-span-4 lg:col-span-3 flex flex-col gap-stack-md sticky top-[100px]"
+              className="lg:col-span-3 flex flex-col gap-stack-md sticky top-[100px]"
             >
               <div className="bg-surface border border-outline-variant p-6 rounded-DEFAULT shadow-sm">
                 <h3 className="font-label-md text-label-md text-on-surface tracking-widest uppercase mb-stack-md border-b border-outline-variant pb-2 flex items-center gap-2">
