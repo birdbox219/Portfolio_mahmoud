@@ -1,6 +1,8 @@
 import resumePdf from './assets/Mahmoud_Elsayed_Unity_Resume.pdf';
 import profileImg from './assets/portfolio_image.jpg';
+import log2Img from './assets/LOGO_2.webp';
 import log3Img from './assets/Log_3_image.jpg';
+import log4Img from './assets/LOG_4_updated.webp';
 
 export const PORTFOLIO_DATA = {
   // Global Operator Data
@@ -184,7 +186,7 @@ export const PORTFOLIO_DATA = {
       role: "Event Orgnizer ",
       company: "FCAI-GD",
       historyText: "As an event organizer, I was core event orgnizer for FCAI Game Developers Club, coordinating with teams to deliver memorable experiences for participants , and wining first place in the game jam along the way",
-      image: "https://images.unsplash.com/photo-1518770660439-4636190af475?auto=format&fit=crop&q=80&w=400&h=400"
+      image: log2Img
     },
     {
       id: "LOG_03",
@@ -201,7 +203,7 @@ export const PORTFOLIO_DATA = {
       role: "Pen testing & reverse engineering intern",
       company: "FIXED SOLUTIONS",
       historyText: "My curiosity about how software works led me to study reverse engineering and contribute to modding communities. Through this journey, I earned my first internship at FIXED SOLUTIONS, focusing on penetration testing and reverse engineering.",
-      image: "https://media.licdn.com/dms/image/v2/D5622AQHcTNeITM0DeQ/feedshare-shrink_2048_1536/B56Zh6qKoIHcAo-/0/1754404576107?e=1778716800&v=beta&t=SYJa2Pvzl01N5dWpHCFQoarpprIyKdVdA0DkzqttKDw"
+      image: log4Img
     }
   ],
 

@@ -1,7 +1,7 @@
 import { useEffect, useRef } from 'react';
 import { motion, useMotionValue, useSpring, useTransform } from 'framer-motion';
 import { useLocation } from 'react-router-dom';
-import logoCircular from '../assets/logo_circular.png';
+import logoCircular from '../assets/logo_circular_updated.webp';
 
 const PARALLAX_FACTOR = 30;
 const SPRING_CONFIG = { stiffness: 40, damping: 30, mass: 1 }; // Over-damped to prevent overshoot
