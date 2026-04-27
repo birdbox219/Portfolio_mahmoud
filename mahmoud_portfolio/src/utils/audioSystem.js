@@ -1,12 +1,17 @@
 let audioCtx = null;
 
-export const initAudio = () => {
+export const getAudioContext = () => {
   if (!audioCtx) {
     audioCtx = new (window.AudioContext || window.webkitAudioContext)();
   }
   if (audioCtx.state === 'suspended') {
     audioCtx.resume();
   }
+  return audioCtx;
+};
+
+export const initAudio = () => {
+  getAudioContext();
 };
 
 export const playHoverSound = () => {

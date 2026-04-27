@@ -1,0 +1,348 @@
+/* ═══════════════════════════════════════════════
+   HIDDEN TERMINAL — CRT OVERLAY
+   Authentic terminal aesthetic with scanlines,
+   text glow, and monospace precision.
+   ═══════════════════════════════════════════════ */
+
+/* ── Base Overlay ── */
+.terminal-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+  background: #0a0a0a;
+  display: flex;
+  flex-direction: column;
+  font-family: 'Space Mono', 'Courier New', monospace;
+  color: #c8b87a;
+  transform: translateY(100%);
+  transition: transform 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+  overflow: hidden;
+}
+
+.terminal-overlay.open {
+  transform: translateY(0);
+}
+
+/* ── CRT Scanlines (animated) ── */
+.terminal-overlay::before {
+  content: "";
+  display: block;
+  position: absolute;
+  inset: 0;
+  background:
+    repeating-linear-gradient(
+      0deg,
+      transparent,
+      transparent 2px,
+      rgba(0, 0, 0, 0.15) 2px,
+      rgba(0, 0, 0, 0.15) 4px
+    );
+  z-index: 50;
+  pointer-events: none;
+  animation: scanline-scroll 8s linear infinite;
+}
+
+/* Subtle CRT flicker */
+.terminal-overlay::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: rgba(200, 184, 122, 0.008);
+  z-index: 49;
+  pointer-events: none;
+  animation: crt-flicker 0.1s infinite;
+}
+
+@keyframes scanline-scroll {
+  0%   { background-position: 0 0; }
+  100% { background-position: 0 100vh; }
+}
+
+@keyframes crt-flicker {
+  0%   { opacity: 0.9; }
+  50%  { opacity: 1; }
+  100% { opacity: 0.95; }
+}
+
+/* ── Header Bar (matches Contact terminal chrome) ── */
+.terminal-header {
+  background: #111110;
+  border-bottom: 1px solid rgba(200, 184, 122, 0.15);
+  padding: 8px 16px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  z-index: 60;
+  position: relative;
+  flex-shrink: 0;
+}
+
+.terminal-title {
+  font-size: 10px;
+  text-transform: uppercase;
+  letter-spacing: 3px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  color: #c8b87a;
+  opacity: 0.8;
+}
+
+.terminal-window-controls {
+  display: flex;
+  gap: 6px;
+}
+
+.terminal-window-dot {
+  width: 10px;
+  height: 10px;
+  border: 1px solid rgba(200, 184, 122, 0.25);
+  background: #0a0a0a;
+  transition: background 0.2s;
+}
+
+.terminal-window-dot:hover {
+  background: rgba(200, 184, 122, 0.15);
+}
+
+.terminal-window-dot.close {
+  background: rgba(200, 184, 122, 0.12);
+  cursor: pointer;
+}
+
+.terminal-window-dot.close:hover {
+  background: rgba(255, 80, 80, 0.4);
+  border-color: rgba(255, 80, 80, 0.6);
+}
+
+/* ── Terminal Body ── */
+.terminal-body {
+  flex: 1;
+  padding: 16px 20px;
+  overflow-y: auto;
+  position: relative;
+  z-index: 10;
+  display: flex;
+  flex-direction: column;
+}
+
+/* Custom scrollbar for terminal */
+.terminal-body::-webkit-scrollbar {
+  width: 4px;
+}
+.terminal-body::-webkit-scrollbar-track {
+  background: transparent;
+}
+.terminal-body::-webkit-scrollbar-thumb {
+  background: rgba(200, 184, 122, 0.2);
+}
+.terminal-body::-webkit-scrollbar-thumb:hover {
+  background: rgba(200, 184, 122, 0.4);
+}
+
+/* ── Log Entries ── */
+.terminal-logs {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.log-entry {
+  font-size: 13px;
+  line-height: 1.6;
+  opacity: 0.7;
+  text-shadow: 0 0 8px rgba(200, 184, 122, 0.2);
+  white-space: pre-wrap;
+  word-break: break-word;
+}
+
+.log-entry.primary {
+  color: #ffffff;
+  opacity: 1;
+  text-shadow: 0 0 8px rgba(255, 255, 255, 0.15);
+}
+
+.log-entry.system {
+  color: #c8b87a;
+  opacity: 0.5;
+  font-size: 13px;
+}
+
+.log-entry.user {
+  color: #9db87a;
+  opacity: 0.9;
+  text-shadow: 0 0 8px rgba(157, 184, 122, 0.2);
+}
+
+.log-entry.error {
+  color: #ff5555;
+  text-shadow: 0 0 10px rgba(255, 68, 68, 0.3);
+  opacity: 1;
+}
+
+/* Typewriter animation for boot lines */
+.log-entry.typewriter {
+  overflow: hidden;
+  border-right: 2px solid transparent;
+  animation: typewriter-reveal 0.6s steps(40, end);
+}
+
+@keyframes typewriter-reveal {
+  0%   { max-width: 0; opacity: 0; }
+  1%   { opacity: 0.7; }
+  100% { max-width: 100%; }
+}
+
+/* ── Input Line ── */
+.terminal-input-line {
+  margin-top: 12px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  position: relative;
+}
+
+.prompt {
+  color: #c8b87a;
+  font-weight: 700;
+  font-size: 13px;
+  text-shadow: 0 0 6px rgba(200, 184, 122, 0.3);
+  flex-shrink: 0;
+}
+
+.terminal-input {
+  background: transparent;
+  border: none;
+  outline: none;
+  color: #ffffff;
+  font-family: 'Space Mono', 'Courier New', monospace;
+  font-size: 13px;
+  flex: 1;
+  caret-color: #c8b87a;
+  text-shadow: 0 0 6px rgba(255, 255, 255, 0.12);
+}
+
+.terminal-input::selection {
+  background: rgba(200, 184, 122, 0.3);
+}
+
+/* Blinking block cursor */
+.terminal-cursor {
+  display: inline-block;
+  width: 8px;
+  height: 15px;
+  background: #c8b87a;
+  animation: cursor-blink 1s step-end infinite;
+  vertical-align: middle;
+  margin-left: 2px;
+  flex-shrink: 0;
+  box-shadow: 0 0 6px rgba(200, 184, 122, 0.4);
+}
+
+@keyframes cursor-blink {
+  0%, 49% { opacity: 1; }
+  50%, 100% { opacity: 0; }
+}
+
+/* ── Glitch Transition (terminal → game) ── */
+.terminal-glitch-out {
+  animation: terminal-scramble 0.8s ease-in forwards;
+}
+
+@keyframes terminal-scramble {
+  0%   { filter: none; opacity: 1; }
+  20%  { filter: brightness(2) hue-rotate(30deg); transform: skewX(2deg); }
+  40%  { filter: invert(0.1) brightness(0.6); transform: skewX(-3deg) translateX(4px); }
+  60%  { filter: brightness(1.8); transform: skewX(1deg) translateX(-2px); }
+  80%  { filter: brightness(0.3); opacity: 0.5; }
+  100% { filter: brightness(0); opacity: 0; transform: scale(0.98); }
+}
+
+/* ── Game Container ── */
+.game-canvas-container {
+  position: absolute;
+  inset: 0;
+  z-index: 100;
+  background: #000000;
+}
+
+.game-canvas-container canvas {
+  display: block;
+  width: 100%;
+  height: 100%;
+  cursor: none;
+}
+
+/* ── Mobile Warning ── */
+.terminal-mobile-warning {
+  display: none;
+  position: absolute;
+  inset: 0;
+  background: #0a0a0a;
+  color: #c8b87a;
+  z-index: 200;
+  padding: 40px;
+  text-align: center;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 20px;
+  font-family: 'Space Mono', monospace;
+}
+
+.terminal-mobile-warning h2 {
+  font-size: 18px;
+  letter-spacing: 4px;
+  text-shadow: 0 0 10px rgba(200, 184, 122, 0.3);
+}
+
+.terminal-mobile-warning p {
+  opacity: 0.5;
+  font-size: 12px;
+  line-height: 1.6;
+  max-width: 300px;
+}
+
+.terminal-mobile-warning button {
+  font-family: 'Space Mono', monospace;
+  font-size: 11px;
+  letter-spacing: 2px;
+  border: 1px solid rgba(200, 184, 122, 0.3);
+  background: transparent;
+  color: #c8b87a;
+  padding: 10px 24px;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.terminal-mobile-warning button:hover {
+  background: rgba(200, 184, 122, 0.1);
+  border-color: #c8b87a;
+}
+
+@media (max-width: 1024px) {
+  .terminal-mobile-warning {
+    display: flex;
+  }
+  .terminal-header,
+  .terminal-body {
+    display: none;
+  }
+}
+
+/* ── Status bar at bottom ── */
+.terminal-status-bar {
+  background: #111110;
+  border-top: 1px solid rgba(200, 184, 122, 0.1);
+  padding: 4px 16px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 10px;
+  letter-spacing: 2px;
+  color: rgba(200, 184, 122, 0.35);
+  z-index: 60;
+  position: relative;
+  flex-shrink: 0;
+}

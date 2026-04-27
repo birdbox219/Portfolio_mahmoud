@@ -216,5 +216,78 @@ export const PORTFOLIO_DATA = {
       { name: "ITCH.IO", url: "https://birdbox774.itch.io/", icon: "gamepad" },
       { name: "YOUTUBE", url: "https://www.youtube.com/@mahmodelsayed6199", icon: "smart_display" }
     ]
+  },
+
+  // ── SIGNAL_PURGE: Verification Questions (placeholders — edit freely) ──
+  verificationQuestions: [
+    {
+      id: "Q1",
+      prompt: "Identify the triad of core interests that define the Operator's primary loop.",
+      resonantKeywords: ["geography", "games", "science", "gaming"],
+      responses: {
+        resonant: "Resonance detected: Academic and ludic foundations confirmed.",
+        neutral: "Data point accepted.",
+        fallback: "Unexpected input. Analyzing persona fragment..."
+      }
+    },
+    {
+      id: "Q2",
+      prompt: "In which narrative framework does the Operator most frequently seek refuge?",
+      resonantKeywords: ["sci-fi", "science fiction", "sf", "scifi"],
+      responses: {
+        resonant: "Narrative match: Scanning for speculative futures...",
+        neutral: "Genre noted.",
+        fallback: "Non-resonant genre. Adjusting filters."
+      }
+    },
+    {
+      id: "Q3",
+      prompt: "What is the final protocol a system should execute before total de-initialization?",
+      resonantKeywords: ["save", "log", "remember", "teach", "warn", "persist"],
+      responses: {
+        resonant: "ACCESS_RESONANCE: HIGH. Philosophical alignment confirmed.",
+        neutral: "ACCESS_RESONANCE: MODERATE. Proceeding.",
+        fallback: "ACCESS_RESONANCE: LOW. ...proceeding with caution."
+      }
+    }
+  ],
+
+  // ── SIGNAL_PURGE: Hidden Content ──
+  hiddenContent: {
+    // Shown via "resume_classified" command after game win
+    classifiedResume: {
+      title: "CLASSIFIED_PERSONNEL_FILE",
+      entries: [
+        "In Grade 6, my science teacher asked me to teach the class. It was the first time I experienced the impact of explaining something to others.",
+        "That moment shaped how I approach learning—understanding is important, but being able to break things down and share them matters more.",
+        "When I joined FCAI-GD, I hoped to relive that experience in a new form. It didn’t happen...."
+      ]
+    },
+    // Shown via "dev_notes" command after game win
+    devNotes: {
+      title: "DEV_NOTES_ARCHIVE",
+      entries: [
+        {
+          id: "NOTE_001",
+          title: "HUMAN_VULNERABILITY",
+          content: "Trust is not deterministic. I know I can struggle with it sometimes. If I’ve ever come across the wrong way or caused harm, it was never intentional—and I'd rather acknowledge that than ignore it."
+        },
+        {
+          id: "NOTE_002",
+          title: "LOW_LEVEL_PREFERENCE",
+          content: "Favorite comfort routine: rice with peas and tomato sauce. Simple, reliable, and always hits."
+        }
+      ]
+    },
+    // Shown via "ls" command after game win
+    hiddenProject: {
+      id: "UNDER_THE_TREE",
+      title: "UNDER_THE_TREE_2",
+      description: "Can you ever reach the top ?",
+      link: "https:#################################"
+    },
+    // Easter egg greeting shown in terminal after win
+    elevatedGreeting: "WELCOME BACK, OPERATOR. SYSTEM INTEGRITY: 100% | FORGIVENESS_PROTOCOL: ACTIVE"
   }
 };
+
